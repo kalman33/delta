@@ -17,7 +17,7 @@
   --bg:#EDEFF4; --surface:#FFFFFF; --surface2:#F4F6FA; --surface3:#E8ECF3;
   --ink:#141A24; --ink2:#525E70; --ink3:#7C8798;
   --line:#DBE1EA; --line2:#C6CEDB;
-  --accent:#2E46A8; --accent-s:#E6EBF8; --accent-b:#B9C4E8;
+  --accent:#2E46A8; --accent-s:#E6EBF8; --accent-b:#B9C4E8; --on-accent:#FFFFFF;
   --conv:#0D7A58; --conv-s:#DFF1E9; --conv-b:#A9D8C6;
   --div:#AE5119; --div-s:#FAEADE; --div-b:#EBC4A4;
   --shadow:0 1px 2px rgba(20,26,36,.05), 0 10px 30px -22px rgba(20,26,36,.5);
@@ -26,7 +26,7 @@
   --bg:#0C1017; --surface:#141A23; --surface2:#1A212C; --surface3:#222B38;
   --ink:#E6EBF3; --ink2:#98A4B6; --ink3:#717E91;
   --line:#242D3A; --line2:#33405120;
-  --accent:#8CA2FF; --accent-s:#1A2340; --accent-b:#31406E;
+  --accent:#8CA2FF; --accent-s:#1A2340; --accent-b:#31406E; --on-accent:#0C1017;
   --conv:#43C79B; --conv-s:#0E2E27; --conv-b:#1E5546;
   --div:#EA9358; --div-s:#301F16; --div-b:#5B3722;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -22px rgba(0,0,0,.9);
@@ -35,7 +35,7 @@
   --bg:#0C1017; --surface:#141A23; --surface2:#1A212C; --surface3:#222B38;
   --ink:#E6EBF3; --ink2:#98A4B6; --ink3:#717E91;
   --line:#242D3A; --line2:#334051;
-  --accent:#8CA2FF; --accent-s:#1A2340; --accent-b:#31406E;
+  --accent:#8CA2FF; --accent-s:#1A2340; --accent-b:#31406E; --on-accent:#0C1017;
   --conv:#43C79B; --conv-s:#0E2E27; --conv-b:#1E5546;
   --div:#EA9358; --div-s:#301F16; --div-b:#5B3722;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -22px rgba(0,0,0,.9);
@@ -245,6 +245,65 @@ code.py em{color:var(--ink3);font-style:normal}
 .dom .arr{flex:none;color:var(--ink3);font-size:14px;align-self:center}
 .dom .etc{color:var(--ink3);font-size:13px;align-self:center}
 
+/* ---------- carte formule clé ---------- */
+.fbox.key{background:var(--accent-s);border-color:var(--accent-b);border-left-color:var(--accent)}
+.fbox.key .m{font-size:1.32em}
+.fbox.key .cap{color:var(--accent)}
+.ftop{font-size:13.5px;color:var(--ink2);border-left:2px solid var(--line2);padding-left:11px}
+
+/* ---------- opérations sur les limites ---------- */
+.opgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.opcard{border:1px solid var(--line);border-radius:10px;background:var(--surface2);padding:12px 14px}
+.opcard .cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.oprow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.oprow:last-child{border-bottom:0}
+.oprow .rr{color:var(--ink2);white-space:nowrap}
+.oprow.fi{color:var(--div)}
+.oprow.fi .rr{color:var(--div);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em}
+
+/* ---------- arbre de décision ---------- */
+.dtree{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.goals{display:flex;flex-wrap:wrap;gap:6px;padding:14px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.goals button{font-family:inherit;font-size:13px;line-height:1.3;padding:7px 11px;border:1px solid var(--line2);background:var(--surface);color:var(--ink2);border-radius:8px;cursor:pointer;text-align:left}
+.goals button:hover{border-color:var(--accent-b);color:var(--ink)}
+.goals button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:500}
+.dwrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
+@media(max-width:780px){.dwrap{grid-template-columns:minmax(0,1fr)}}
+.dbody{padding:16px 16px 18px}
+.dpanel{border-left:1px solid var(--line);background:var(--surface2);padding:16px}
+@media(max-width:780px){.dpanel{border-left:0;border-top:1px solid var(--line)}}
+.tree,.tree ul{list-style:none;margin:0;padding:0}
+.tree>ul{margin-left:0;padding-left:0;border-left:0}
+.tree>ul>li::before{display:none}
+.tree ul{margin-left:9px;padding-left:16px;border-left:1px solid var(--line2)}
+.tree li{position:relative;padding:2px 0}
+.tree ul>li::before{content:"";position:absolute;left:-16px;top:17px;width:11px;height:1px;background:var(--line2)}
+.nd{display:inline-flex;align-items:baseline;gap:7px;font-size:13.5px;line-height:1.45;padding:5px 10px;border-radius:8px;border:1px solid transparent;text-align:left}
+.nd.q{color:var(--ink);background:var(--surface2);border-color:var(--line);font-weight:500}
+.nd.q .mk{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--div);font-weight:600}
+.nd.a{color:var(--ink2);font-size:12.5px;padding-left:2px}
+.nd.a .mk{color:var(--ink3);font-family:'IBM Plex Mono',monospace;font-size:10px}
+button.nd.m{font-family:inherit;cursor:pointer;background:var(--conv-s);border-color:var(--conv-b);color:var(--conv);font-weight:500}
+button.nd.m:hover{border-color:var(--conv);box-shadow:var(--shadow)}
+button.nd.m[aria-pressed="true"]{background:var(--conv);border-color:var(--conv);color:var(--on-accent)}
+.nd .ref{font-family:'IBM Plex Mono',monospace;font-size:10px;opacity:.7;flex:none}
+.dpanel .pk{font-size:15px;font-weight:600;margin:7px 0 2px;line-height:1.35}
+.dpanel .pref{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.dpanel .exq{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-top:12px}
+.dpanel .exq .lb{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:4px}
+.dpanel .exq .ar{color:var(--conv);font-weight:600;margin:0 4px}
+.dpanel .hint{font-size:12px;color:var(--ink3);margin-top:12px;font-style:italic}
+
+/* ---------- exercices éclair ---------- */
+.flash{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:12px}
+.flash .ex{display:flex;flex-direction:column}
+.flash .ex .q{flex:1;padding:12px 14px}
+.flash .ex .q p{font-size:14px}
+.flash details.fix summary{padding:9px 14px;font-size:12.5px}
+.flash .corr{padding:2px 14px 14px;font-size:13.5px}
+.flash .corr>*+*{margin-top:8px}
+.flash .res{font-size:13.5px;padding:8px 11px}
+
 footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font-size:12.5px;border-top:1px solid var(--line);padding-top:22px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -266,7 +325,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
 
 <div class="shell">
 <nav class="side">
-  <div class="eyebrow lbl">Les 7 parties</div>
+  <div class="eyebrow lbl">Sommaire</div>
   <ol id="toc"></ol>
 </nav>
 
@@ -274,13 +333,26 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   <div class="hero">
     <div class="eyebrow">Chapitre 1 · Analyse</div>
     <h1>Suites <em>numériques</em></h1>
-    <p class="lede">Tout le chapitre en 7 parties. Chacune : le cours en quelques lignes, les formules à visualiser, deux exercices-types centrés sur la méthode, et les pièges du bac.</p>
+    <p class="lede">Un <a href="#pq">arbre de décision</a> pour savoir quoi faire quand on sèche, sept parties pour comprendre, <a href="#pm">dix questions mélangées</a> pour vérifier. Chaque partie : le cours en quelques lignes, les formules à visualiser, deux exercices-types centrés sur la méthode, et les pièges du bac.</p>
     <div class="meta">
-      <span class="chip">≈ 30 min de lecture</span>
-      <span class="chip">Récurrence · Limites · Convergence</span>
-      <span class="chip">Progression sauvegardée</span>
+      <span class="chip">Arbre de décision</span>
+      <span class="chip">7 parties</span>
+      <span class="chip">24 exercices corrigés</span>
+      <span class="chip">≈ 30 min</span>
     </div>
   </div>
+
+<!-- ============================ arbre ============================ -->
+<section class="part" id="pq" data-num="?" data-title="Que faire&nbsp;?">
+  <div class="phead">
+    <div class="num">?</div>
+    <div><h2>Arbre de décision</h2><div class="sub">On me demande quoi&nbsp;? → qu'est-ce que je vérifie&nbsp;? → quelle méthode j'applique</div></div>
+  </div>
+  <div class="pane">
+    <p class="ftop">Le réflexe quand on sèche : partir de <b>ce qui est demandé</b>, pas de ce qu'on se rappelle. Choisissez la question de l'énoncé, suivez les branches, survolez une méthode verte pour en voir un micro-exemple.</p>
+    <div class="dtree" id="dtree"></div>
+  </div>
+</section>
 
 <!-- ============================ 1 ============================ -->
 <section class="part" id="p1" data-num="01" data-title="Généralités">
@@ -313,7 +385,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
-    <div class="fbox">
+    <p class="ftop">Une seule idée : pour savoir si ça monte, on compare un terme à son suivant. Tout le reste en découle.</p>
+    <div class="fbox key">
       <div class="cap">Le test de variation</div>
       <span class="m mblk">Δ = u_{n+1} − u_n</span>
       <div class="note"><span class="m">Δ ≥ 0</span> pour tout <span class="m">n</span> → suite <b>croissante</b> &nbsp;·&nbsp; <span class="m">Δ ≤ 0</span> → <b>décroissante</b> &nbsp;·&nbsp; <span class="m">Δ = 0</span> → <b>constante</b>.</div>
@@ -398,6 +471,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
+    <p class="ftop">Quatre formules seulement : la relation de récurrence et la formule explicite, pour chacun des deux modèles. Les sommes viennent ensuite.</p>
     <div class="fgrid">
       <div class="fbox arith">
         <div class="cap">Arithmétique · raison r</div>
@@ -502,7 +576,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
-    <div class="fbox">
+    <p class="ftop">Ici il n'y a rien à calculer : ce qui est noté, c'est la <b>rédaction</b>. Apprenez le squelette, il est identique dans tous les sujets.</p>
+    <div class="fbox key">
       <div class="cap">Le squelette de rédaction — à recopier tel quel</div>
       <p style="font-size:14px;line-height:1.85;margin-top:4px">
       Soit <span class="m">P(n)</span> la propriété : « … ».<br>
@@ -598,45 +673,53 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
+    <p class="ftop">Deux choses à savoir par cœur : les <b>limites usuelles</b> (les briques de base) et les <b>4 formes indéterminées</b> (elles disent quand le calcul direct est interdit). Le reste se déduit.</p>
+
+    <div class="fbox key">
+      <div class="cap">Les 4 formes indéterminées</div>
+      <span class="m mblk">∞ − ∞ &nbsp;&nbsp; 0 × ∞ &nbsp;&nbsp; @{∞}{∞} &nbsp;&nbsp; @{0}{0}</span>
+      <div class="note">« Indéterminé » ne veut <b>pas</b> dire « pas de limite » : cela veut dire que le calcul brut ne suffit pas. La parade : <b>factoriser par le terme dominant</b>, ou passer par la <b>quantité conjuguée</b> s'il y a une racine.</div>
+    </div>
+
+    <h3>Les briques de base</h3>
     <div class="fgrid">
       <div class="fbox">
-        <div class="cap">Limites usuelles · vers +∞</div>
+        <div class="cap">Vers +∞</div>
         <span class="m mblk">n → +∞ &nbsp; n² → +∞ &nbsp; n^k → +∞ &nbsp; √n → +∞</span>
       </div>
       <div class="fbox">
-        <div class="cap">Limites usuelles · vers 0</div>
+        <div class="cap">Vers 0</div>
         <span class="m mblk">@{1}{n} → 0 &nbsp; @{1}{n²} → 0 &nbsp; @{1}{√n} → 0</span>
       </div>
     </div>
 
     <h3>Opérations sur les limites</h3>
-    <div class="tw"><table>
-      <tr><th>Situation</th><th>Limite de la somme</th></tr>
-      <tr><td><span class="m">ℓ + ℓ'</span></td><td><span class="m">ℓ + ℓ'</span></td></tr>
-      <tr><td><span class="m">ℓ + (+∞)</span></td><td><span class="m">+∞</span></td></tr>
-      <tr><td><span class="m">(+∞) + (+∞)</span></td><td><span class="m">+∞</span></td></tr>
-      <tr><td><span class="m">(+∞) + (−∞)</span></td><td class="fi">indéterminé</td></tr>
-    </table></div>
-    <div class="tw"><table>
-      <tr><th>Situation</th><th>Limite du produit</th></tr>
-      <tr><td><span class="m">ℓ × ℓ'</span></td><td><span class="m">ℓ × ℓ'</span></td></tr>
-      <tr><td><span class="m">ℓ ≠ 0</span> fois <span class="m">±∞</span></td><td><span class="m">±∞</span> (règle des signes)</td></tr>
-      <tr><td><span class="m">∞ × ∞</span></td><td><span class="m">∞</span> (règle des signes)</td></tr>
-      <tr><td><span class="m">0 × ∞</span></td><td class="fi">indéterminé</td></tr>
-    </table></div>
-    <div class="tw"><table>
-      <tr><th>Situation</th><th>Limite du quotient</th></tr>
-      <tr><td><span class="m">@{ℓ}{ℓ'}</span> avec <span class="m">ℓ' ≠ 0</span></td><td><span class="m">@{ℓ}{ℓ'}</span></td></tr>
-      <tr><td><span class="m">@{ℓ}{±∞}</span></td><td><span class="m">0</span></td></tr>
-      <tr><td><span class="m">@{±∞}{ℓ}</span> avec <span class="m">ℓ ≠ 0</span></td><td><span class="m">±∞</span> (règle des signes)</td></tr>
-      <tr><td><span class="m">@{∞}{∞}</span> &nbsp;et&nbsp; <span class="m">@{0}{0}</span></td><td class="fi">indéterminé</td></tr>
-    </table></div>
-
-    <div class="fbox" style="border-left-color:var(--div)">
-      <div class="cap">Les 4 formes indéterminées</div>
-      <span class="m mblk">∞ − ∞ &nbsp;&nbsp; 0 × ∞ &nbsp;&nbsp; @{∞}{∞} &nbsp;&nbsp; @{0}{0}</span>
-      <div class="note">« Indéterminé » ne veut pas dire « pas de limite » : cela veut dire que le calcul brut ne suffit pas. Il faut <b>factoriser</b> ou utiliser la <b>quantité conjuguée</b>.</div>
+    <p class="ftop">Tout se comporte comme on l'espère — sauf les cases orange, qui sont exactement les 4 formes indéterminées.</p>
+    <div class="opgrid">
+      <div class="opcard">
+        <div class="cap">Somme</div>
+        <div class="oprow"><span class="m">ℓ + ℓ'</span><span class="rr m">ℓ + ℓ'</span></div>
+        <div class="oprow"><span class="m">ℓ + (+∞)</span><span class="rr m">+∞</span></div>
+        <div class="oprow"><span class="m">(+∞) + (+∞)</span><span class="rr m">+∞</span></div>
+        <div class="oprow fi"><span class="m">(+∞) + (−∞)</span><span class="rr">F. I.</span></div>
+      </div>
+      <div class="opcard">
+        <div class="cap">Produit</div>
+        <div class="oprow"><span class="m">ℓ × ℓ'</span><span class="rr m">ℓ × ℓ'</span></div>
+        <div class="oprow"><span class="m">ℓ ≠ 0 &nbsp;fois&nbsp; ±∞</span><span class="rr m">±∞</span></div>
+        <div class="oprow"><span class="m">∞ × ∞</span><span class="rr m">∞</span></div>
+        <div class="oprow fi"><span class="m">0 × ∞</span><span class="rr">F. I.</span></div>
+      </div>
+      <div class="opcard">
+        <div class="cap">Quotient</div>
+        <div class="oprow"><span class="m">@{ℓ}{ℓ'}</span><span class="rr m">@{ℓ}{ℓ'}</span></div>
+        <div class="oprow"><span class="m">@{ℓ}{±∞}</span><span class="rr m">0</span></div>
+        <div class="oprow"><span class="m">@{±∞}{ℓ}</span><span class="rr m">±∞</span></div>
+        <div class="oprow fi"><span class="m">@{∞}{∞}</span><span class="rr">F. I.</span></div>
+        <div class="oprow fi"><span class="m">@{0}{0}</span><span class="rr">F. I.</span></div>
+      </div>
     </div>
+    <p class="ftop">Pour les cases <span class="m">±∞</span>, le signe se détermine à part, avec la règle des signes.</p>
   </div>
 
   <div class="pane" data-tab="Exercices">
@@ -711,6 +794,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
+    <p class="ftop">Deux théorèmes qui se choisissent en une seconde : limite <b>infinie</b> → comparaison ; limite <b>finie</b> → gendarmes. Puis le tableau de <span class="m">q^n</span>, la ligne la plus rentable du chapitre.</p>
     <div class="fgrid">
       <div class="fbox">
         <div class="cap">Comparaison · vers l'infini</div>
@@ -815,7 +899,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
-    <div class="fbox">
+    <p class="ftop">Un théorème, et une mise en garde qui vaut des points : il prouve qu'une limite <b>existe</b>, il ne la calcule pas.</p>
+    <div class="fbox key">
       <div class="cap">Théorème de la convergence monotone</div>
       <span class="m mblk">croissante + majorée ⟹ converge</span>
       <span class="m mblk">décroissante + minorée ⟹ converge</span>
@@ -905,7 +990,8 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
   </div>
 
   <div class="pane" data-tab="Formules">
-    <div class="fbox">
+    <p class="ftop">Une méthode, toujours la même, et l'algorithme de seuil qui l'accompagne.</p>
+    <div class="fbox key">
       <div class="cap">Suite arithmético-géométrique</div>
       <span class="m mblk">u_{n+1} = a u_n + b &nbsp;&nbsp;→&nbsp;&nbsp; poser &nbsp; v_n = u_n − ℓ &nbsp; où &nbsp; ℓ = a ℓ + b</span>
       <div class="note">Alors <span class="m">(v_n)</span> est géométrique de raison <span class="m">a</span>, et :</div>
@@ -968,6 +1054,28 @@ n = 0
       <div class="tip astuce"><span class="lb">Astuce</span><div><p class="t">Vérifier avec <span class="m">u_0</span></p><p>Une fois la formule explicite trouvée, testez-la sur <span class="m">n = 0</span> et <span class="m">n = 1</span>. Dix secondes pour détecter une erreur de signe qui ferait perdre toute la suite de l'exercice.</p></div></div>
       <div class="tip piege"><span class="lb">Piège</span><div><p class="t">Oublier de revenir à <span class="m">u_n</span></p><p>La question porte sur <span class="m">u_n</span>, pas sur <span class="m">v_n</span>. Terminez toujours par <span class="m">u_n = v_n + ℓ</span>.</p></div></div>
       <div class="tip bac"><span class="lb">Au bac</span><div><p class="t">Boucle <span class="mono">while</span>, jamais <span class="mono">for</span></p><p>On ne connaît pas d'avance le nombre de tours : c'est précisément ce qu'on cherche. La condition du <span class="mono">while</span> est la <b>négation</b> de l'objectif (« tant que ce n'est pas encore atteint »).</p></div></div>
+    </div>
+  </div>
+</section>
+<!-- ============================ mixtes ============================ -->
+<section class="part" id="pm" data-num="✓" data-title="Exercices mixtes">
+  <div class="phead">
+    <div class="num">✓</div>
+    <div><h2>Exercices mixtes</h2><div class="sub">Dix questions courtes, toutes parties mélangées — pour vérifier que les réflexes sont là</div></div>
+  </div>
+  <div class="pane">
+    <p class="ftop">Contrairement aux exercices des parties, ceux-ci ne vous disent pas quelle méthode appliquer : c'est justement ce qu'il faut retrouver. Si vous bloquez, l'<a href="#pq">arbre de décision</a> est fait pour ça.</p>
+    <div class="flash">
+<div class="ex"><div class="q"><div class="qh"><span class="tag">1</span><span class="tag meth">partie 02</span></div><p>Nature de la suite <span class="m">u_n = 5 − 3n</span>&nbsp;?</p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div><span class="m">u_{n+1} − u_n = 5 − 3(n+1) − (5 − 3n) = −3</span></div></div><div class="step"><span class="k">2</span><div>La différence est <b>constante</b>, indépendante de <span class="m">n</span>.</div></div><div class="res">Arithmétique de raison <span class="m">r = −3</span>, de premier terme <span class="m">u_0 = 5</span>. Donc <b>décroissante</b>, et <span class="m">u_n → −∞</span>.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">2</span><span class="tag meth">partie 04</span></div><p><span class="m">lim @{2n + 1}{3n − 4}</span></p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div>Forme indéterminée <span class="m">@{∞}{∞}</span>.</div></div><div class="step"><span class="k">2</span><div>On factorise haut et bas par <span class="m">n</span> : <span class="m">@{n(2 + @{1}{n})}{n(3 − @{4}{n})}</span></div></div><div class="res"><span class="m">lim = @{2}{3}</span> — le quotient des termes de plus haut degré.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">3</span><span class="tag meth">partie 01</span></div><p>Sens de variation de <span class="m">u_n = @{n}{n + 1}</span>&nbsp;?</p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div><span class="m">u_{n+1} − u_n = @{n+1}{n+2} − @{n}{n+1}</span></div></div><div class="step"><span class="k">2</span><div>Même dénominateur : <span class="m">@{(n+1)² − n(n+2)}{(n+1)(n+2)} = @{1}{(n+1)(n+2)}</span></div></div><div class="res">Strictement positif : la suite est <b>croissante</b>. (Elle converge vers 1.)</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">4</span><span class="tag meth">partie 05</span></div><p><span class="m">lim (3 × 0,8^n − 2)</span></p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div>On regarde la raison : <span class="m">−1 &lt; 0,8 &lt; 1</span>.</div></div><div class="step"><span class="k">2</span><div>Donc <span class="m">0,8^n → 0</span>, puis <span class="m">3 × 0,8^n → 0</span>.</div></div><div class="res"><span class="m">lim = −2</span>. La suite <b>converge</b>.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">5</span><span class="tag meth">partie 04</span></div><p><span class="m">lim (n² − n)</span></p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div>Forme indéterminée <span class="m">∞ − ∞</span> : interdit de conclure directement.</div></div><div class="step"><span class="k">2</span><div>On factorise par le terme dominant : <span class="m">n²(1 − @{1}{n})</span></div></div><div class="step"><span class="k">3</span><div><span class="m">n² → +∞</span> et <span class="m">1 − @{1}{n} → 1</span>.</div></div><div class="res"><span class="m">lim = +∞</span>. Le carré l'emporte toujours sur le terme de degré 1.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">6</span><span class="tag meth">partie 05</span></div><p><span class="m">lim (2 + @{(−1)^n}{n})</span></p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div><span class="m">(−1)^n</span> n'a pas de limite : on encadre.</div></div><div class="step"><span class="k">2</span><div><span class="m">−@{1}{n} ≤ @{(−1)^n}{n} ≤ @{1}{n}</span>, et les deux bornes tendent vers 0.</div></div><div class="res">Par les gendarmes le terme tend vers 0, donc <span class="m">lim = 2</span>.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">7</span><span class="tag meth">partie 02</span></div><p><span class="m">1 + 2 + 3 + ... + 100</span></p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div>Somme des 100 premiers entiers : <span class="m">@{n(n+1)}{2}</span> avec <span class="m">n = 100</span>.</div></div><div class="res"><span class="m">@{100 × 101}{2} = 5 050</span>.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">8</span><span class="tag meth">partie 07</span></div><p><span class="m">u_{n+1} = 3u_n − 4</span>. On pose <span class="m">v_n = u_n − 2</span>. Nature de <span class="m">(v_n)</span>&nbsp;?</p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div><span class="m">v_{n+1} = u_{n+1} − 2 = 3u_n − 4 − 2 = 3u_n − 6</span></div></div><div class="step"><span class="k">2</span><div>On factorise par 3 : <span class="m">v_{n+1} = 3(u_n − 2) = 3 v_n</span></div></div><div class="res"><b>Géométrique de raison 3.</b> Le 2 vient du point fixe <span class="m">ℓ = 3ℓ − 4</span>. Comme <span class="m">3 &gt; 1</span>, la suite <b>diverge</b> (sauf si <span class="m">u_0 = 2</span>).</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">9</span><span class="tag meth">partie 06</span></div><p>Vrai ou faux&nbsp;: « toute suite bornée converge ».</p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div>On cherche un contre-exemple.</div></div><div class="step"><span class="k">2</span><div><span class="m">u_n = (−1)^n</span> reste entre <span class="m">−1</span> et <span class="m">1</span> : elle est bornée.</div></div><div class="res"><b>Faux.</b> Elle n'a pas de limite. Il faut <b>monotone ET bornée</b> — les deux.</div></div></details></div>
+<div class="ex"><div class="q"><div class="qh"><span class="tag">10</span><span class="tag meth">partie 03</span></div><p><span class="m">u_0 = 1</span> et <span class="m">u_{n+1} = √(u_n + 2)</span>. Montrer que <span class="m">0 ≤ u_n ≤ 2</span>.</p></div><details class="fix"><summary>Réponse</summary><div class="corr"><div class="step"><span class="k">1</span><div><b>Init.</b> <span class="m">u_0 = 1</span> : encadré. ✓</div></div><div class="step"><span class="k">2</span><div><b>Hérédité.</b> On suppose <span class="m">0 ≤ u_n ≤ 2</span>, on ajoute 2 : <span class="m">2 ≤ u_n + 2 ≤ 4</span></div></div><div class="step"><span class="k">3</span><div>La racine est croissante : <span class="m">√2 ≤ √(u_n + 2) ≤ 2</span></div></div><div class="res">Or <span class="m">√2 ≥ 0</span>, donc <span class="m">0 ≤ u_{n+1} ≤ 2</span>. <b>Conclusion</b> : vrai pour tout <span class="m">n</span> par récurrence.</div></div></details></div>
     </div>
   </div>
 </section>
@@ -1214,6 +1322,189 @@ function explorer(el){
   draw();
 }
 
+/* ---------------- arbre de décision ---------------- */
+function M(x){ return '<span class="m">'+x+'</span>'; }
+var TREE=[
+{g:"Calculer une limite", t:[
+  {q:"L’expression contient "+M("(−1)^n")+", "+M("sin(n)")+" ou "+M("cos(n)")+" ?", c:[
+    {a:"Oui · la limite attendue est finie", c:[
+      {m:"Théorème des gendarmes", ref:"05", note:"Encadrer, puis vérifier que les deux bornes ont bien la <b>même</b> limite.",
+       ex:{q:"−@{1}{n} ≤ @{sin(n)}{n} ≤ @{1}{n}", r:"lim = 0"}}]},
+    {a:"Oui · la limite attendue est infinie", c:[
+      {m:"Théorème de comparaison", ref:"05", note:"Une seule inégalité suffit : on pousse par en dessous, ou on écrase par au-dessus.",
+       ex:{q:"n + (−1)^n ≥ n − 1", r:"lim = +∞"}}]}]},
+  {q:"Le calcul direct donne une forme indéterminée ?", c:[
+    {a:"Non", c:[{m:"Opérations sur les limites", ref:"04", ex:{q:"2 + @{1}{n}", r:"lim = 2"}}]},
+    {a:"Oui · quotient de polynômes", c:[
+      {m:"Factoriser par le terme de plus haut degré", ref:"04", note:"Raccourci de vérification : le quotient des termes dominants.",
+       ex:{q:"@{3n² − n}{n² + 5} = @{3 − @{1}{n}}{1 + @{5}{n²}}", r:"lim = 3"}}]},
+    {a:"Oui · une racine dans une différence", c:[
+      {m:"Multiplier par la quantité conjuguée", ref:"04", note:"Réflexe automatique dès qu’un √ apparaît dans une forme ∞ − ∞.",
+       ex:{q:"√(n+1) − √n = @{1}{√(n+1) + √n}", r:"lim = 0"}}]}]},
+  {q:"Une puissance "+M("q^n")+" apparaît ?", c:[
+    {m:"Tableau des limites de q puissance n", ref:"05", note:"Les quatre cas : q &gt; 1, q = 1, −1 &lt; q &lt; 1, q ≤ −1.",
+     ex:{q:"−1 &lt; 0,5 &lt; 1", r:"0,5^n → 0"}}]}]},
+
+{g:"Montrer qu’une suite converge", t:[
+  {q:"Connaît-on la formule explicite de "+M("u_n")+" ?", c:[
+    {a:"Oui", c:[{m:"Calculer la limite directement", ref:"04", note:"On retombe sur « Calculer une limite ».",
+       ex:{q:"u_n = 6 − 4 × 0,5^n", r:"lim = 6"}}]},
+    {a:"Non · suite définie par récurrence", c:[
+      {q:"Est-elle monotone ET bornée du bon côté ?", c:[
+        {a:"Croissante et majorée", c:[
+          {m:"Théorème de la convergence monotone", ref:"06", note:"Il donne l’<b>existence</b> de la limite, jamais sa valeur : ℓ ≤ M, mais ℓ ≠ M en général.",
+           ex:{q:"u_n ≤ 6 et (u_n) croissante", r:"converge vers ℓ ≤ 6"}}]},
+        {a:"Décroissante et minorée", c:[
+          {m:"Théorème de la convergence monotone", ref:"06", note:"Version symétrique : elle descend, le plancher l’arrête.",
+           ex:{q:"u_n ≥ 0 et (u_n) décroissante", r:"converge vers ℓ ≥ 0"}}]},
+        {a:"On ne sait pas encore", c:[
+          {m:"1. Majorer par récurrence · 2. Signe de u_{n+1} − u_n", ref:"03", note:"C’est l’ordre imposé par les sujets : d’abord la borne, ensuite la monotonie.",
+           ex:{q:"u_n ≤ 6 puis u_{n+1} − u_n = 0,5(6 − u_n)", r:"croissante et majorée"}}]}]}]}]},
+  {q:"La convergence est acquise — reste la valeur", c:[
+    {m:"Point fixe : résoudre ℓ = f(ℓ)", ref:"06", note:"Valable <b>seulement</b> après avoir prouvé que la suite converge.",
+     ex:{q:"ℓ = 0,5ℓ + 3", r:"ℓ = 6"}},
+    {m:"Suite auxiliaire v_n = u_n − ℓ", ref:"07", note:"Plus long, mais donne en prime la formule explicite et les seuils.",
+     ex:{q:"v_n = −4 × 0,5^n", r:"u_n = 6 − 4 × 0,5^n"}}]}]},
+
+{g:"Démontrer une propriété pour tout n", t:[
+  {q:"La propriété doit valoir pour tout entier "+M("n")+" ?", c:[
+    {a:"Oui — c’est presque toujours le cas", c:[
+      {m:"Raisonnement par récurrence", ref:"03", note:"Initialisation · Hérédité · Conclusion. Les trois sont notées séparément.",
+       ex:{q:"P(0) vraie et P(n) ⟹ P(n+1)", r:"P(n) vraie pour tout n"}}]}]},
+  {q:"Quelle est la forme de la propriété ?", c:[
+    {a:"Une inégalité", c:[
+      {m:"Partir de l’hypothèse, lui appliquer les opérations qui fabriquent u_{n+1}", ref:"03",
+       note:"On <b>part</b> de l’hypothèse, on ne part jamais du résultat à démontrer.",
+       ex:{q:"u_n ≤ 6 ⟹ 0,5u_n + 3 ≤ 6", r:"u_{n+1} ≤ 6"}}]},
+    {a:"Une égalité (formule explicite)", c:[
+      {m:"Partir de u_{n+1}, remplacer par la récurrence, injecter l’hypothèse", ref:"03",
+       ex:{q:"0,5(6 − 4 × 0,5^n) + 3", r:"6 − 4 × 0,5^{n+1}"}}]}]}]},
+
+{g:"Trouver la formule explicite", t:[
+  {q:"Quelle est la relation de récurrence ?", c:[
+    {a:M("u_{n+1} = u_n + r"), c:[
+      {m:"Arithmétique : u_n = u_0 + nr", ref:"02", ex:{q:"u_0 = 5 , r = −3", r:"u_n = 5 − 3n"}}]},
+    {a:M("u_{n+1} = q u_n"), c:[
+      {m:"Géométrique : u_n = u_0 q^n", ref:"02", ex:{q:"u_0 = 6 , q = 2", r:"u_n = 6 × 2^n"}}]},
+    {a:M("u_{n+1} = a u_n + b"), c:[
+      {m:"Suite auxiliaire v_n = u_n − ℓ, avec ℓ = aℓ + b", ref:"07",
+       note:"L’énoncé donne presque toujours le v_n à poser — et ce ℓ est la limite.",
+       ex:{q:"u_{n+1} = 0,5u_n + 3 , ℓ = 6", r:"u_n = (u_0 − 6) × 0,5^n + 6"}}]},
+    {a:"Aucune des trois", c:[
+      {m:"Calculer les premiers termes, conjecturer, démontrer par récurrence", ref:"03",
+       ex:{q:"u_0 , u_1 , u_2 , u_3", r:"conjecture puis récurrence"}}]}]}]},
+
+{g:"Étudier le sens de variation", t:[
+  {q:"Comment la suite est-elle définie ?", c:[
+    {a:"Explicitement, "+M("u_n = f(n)"), c:[
+      {m:"Étudier les variations de f sur [0 ; +∞[", ref:"01", note:"Possible uniquement pour une suite <b>explicite</b>.",
+       ex:{q:"f(x) = @{x}{x+1} croissante", r:"(u_n) croissante"}},
+      {m:"Ou : signe de u_{n+1} − u_n", ref:"01", note:"Méthode universelle, elle marche dans tous les cas.",
+       ex:{q:"@{n+1}{n+2} − @{n}{n+1} = @{1}{(n+1)(n+2)}", r:"croissante"}}]},
+    {a:"Par récurrence, "+M("u_{n+1} = f(u_n)"), c:[
+      {m:"Signe de u_{n+1} − u_n, en réutilisant un encadrement déjà démontré", ref:"06",
+       note:"Ne jamais dériver une suite définie par récurrence : la dérivée n’existe que pour les fonctions.",
+       ex:{q:"u_{n+1} − u_n = 0,5(6 − u_n) et u_n ≤ 6", r:"croissante"}}]}]},
+  {q:"Termes strictement positifs, avec des puissances ?", c:[
+    {m:"Comparer le quotient u_{n+1} / u_n à 1", ref:"01", note:"Le quotient se simplifie tout seul quand il y a des puissances.",
+     ex:{q:"@{u_{n+1}}{u_n} = 2 &gt; 1", r:"croissante"}}]}]},
+
+{g:"Calculer une somme de termes", t:[
+  {q:"De quel type sont les termes additionnés ?", c:[
+    {a:"Arithmétiques", c:[
+      {m:"nb de termes × (premier + dernier) / 2", ref:"02",
+       ex:{q:"1 + 2 + ... + 100", r:"@{100 × 101}{2} = 5 050"}}]},
+    {a:"Géométriques", c:[
+      {m:"premier terme × (1 − q^nb) / (1 − q)", ref:"02", note:"Une seule formule à retenir : elle marche quel que soit l’indice de départ.",
+       ex:{q:"5 + 5×3 + ... + 5×3^{10}", r:"442 865"}}]}]},
+  {q:"Avant tout calcul", c:[
+    {m:"Compter : dernier indice − premier indice + 1", ref:"02", note:"L’erreur la plus fréquente du chapitre.",
+     ex:{q:"de u_3 à u_{20}", r:"18 termes"}}]}]},
+
+{g:"Trouver un seuil", t:[
+  {q:"A-t-on la formule explicite de "+M("u_n")+" ?", c:[
+    {a:"Oui", c:[
+      {m:"Résoudre l’inéquation", ref:"07", note:"Diviser par un nombre négatif <b>inverse</b> le sens de l’inégalité.",
+       ex:{q:"6 − 4 × 0,5^n &gt; 5,9", r:"n = 6"}}]},
+    {a:"Non", c:[
+      {m:"Écrire un algorithme : boucle while", ref:"07", note:"Jamais une boucle <b>for</b> : le nombre de tours est justement ce qu’on cherche.",
+       ex:{q:"while u ≤ 5,9 : u = 0,5u + 3", r:"n = 6"}}]}]}]},
+
+{g:"Montrer qu’elle est arithmétique ou géométrique", t:[
+  {q:"Que donne le calcul, une fois simplifié ?", c:[
+    {a:M("u_{n+1} − u_n")+" est une constante", c:[
+      {m:"Arithmétique, de raison cette constante", ref:"02",
+       ex:{q:"5 − 3(n+1) − (5 − 3n)", r:"r = −3"}}]},
+    {a:M("@{u_{n+1}}{u_n}")+" est une constante", c:[
+      {m:"Géométrique, de raison cette constante", ref:"02", note:"Vérifier d’abord que les termes sont tous non nuls.",
+       ex:{q:"@{3 × 2^{n+2}}{3 × 2^{n+1}}", r:"q = 2"}}]},
+    {a:"Le résultat contient encore "+M("n"), c:[
+      {m:"Ni l’une ni l’autre — chercher une suite auxiliaire", ref:"07",
+       note:"Cas typique de u_{n+1} = a u_n + b.",
+       ex:{q:"v_n = u_n − ℓ", r:"(v_n) géométrique"}}]}]}]}
+];
+
+function decisionTree(root){
+  var gi=0, leaves=[], cur=0;
+  root.innerHTML='<div class="goals" role="group" aria-label="Ce que demande l’énoncé"></div>'
+    + '<div class="dwrap"><div class="dbody"><div class="tree" id="dtree-body"></div></div>'
+    + '<div class="dpanel" id="dtree-panel"></div></div>';
+  var goals=root.querySelector(".goals"), body=root.querySelector("#dtree-body"), panel=root.querySelector("#dtree-panel");
+
+  TREE.forEach(function(g,i){
+    var b=document.createElement("button");
+    b.type="button"; b.textContent=g.g; b.setAttribute("aria-pressed", String(i===0));
+    b.addEventListener("click", function(){ gi=i; render(); });
+    goals.appendChild(b);
+  });
+
+  function walk(list){
+    return '<ul>'+list.map(function(n){
+      if(n.m){
+        leaves.push(n);
+        return '<li><button type="button" class="nd m" data-i="'+(leaves.length-1)+'" aria-pressed="false">'
+          + '<span>'+n.m+'</span><span class="ref">'+n.ref+'</span></button></li>';
+      }
+      var isQ=!!n.q;
+      return '<li><span class="nd '+(isQ?"q":"a")+'"><span class="mk">'+(isQ?"?":"→")+'</span>'
+        + '<span>'+(n.q||n.a)+'</span></span>'+(n.c?walk(n.c):'')+'</li>';
+    }).join("")+'</ul>';
+  }
+  function showLeaf(i){
+    var n=leaves[i]; if(!n) return;
+    cur=i;
+    body.querySelectorAll("button.nd.m").forEach(function(b){
+      b.setAttribute("aria-pressed", String(parseInt(b.dataset.i,10)===i));
+    });
+    panel.innerHTML='<div class="pref">Méthode · partie '+n.ref+'</div>'
+      + '<div class="pk">'+n.m+'</div>'
+      + '<div class="exq"><span class="lb">Micro-exemple</span>'
+      +   '<span class="m">'+n.ex.q+'</span><span class="ar">→</span><span class="m">'+n.ex.r+'</span></div>'
+      + (n.note?'<div class="hint">'+n.note+'</div>':'');
+    renderMath(panel);
+  }
+  function render(){
+    leaves=[];
+    [].slice.call(goals.children).forEach(function(b,i){ b.setAttribute("aria-pressed", String(i===gi)); });
+    body.innerHTML=walk(TREE[gi].t);
+    renderMath(body);
+    showLeaf(0);
+  }
+  body.addEventListener("mouseover", function(e){
+    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
+    if(b) showLeaf(parseInt(b.dataset.i,10));
+  });
+  body.addEventListener("focusin", function(e){
+    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
+    if(b) showLeaf(parseInt(b.dataset.i,10));
+  });
+  body.addEventListener("click", function(e){
+    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
+    if(b) showLeaf(parseInt(b.dataset.i,10));
+  });
+  render();
+}
+
 /* ---------------- onglets, sommaire, progression ---------------- */
 var LS={
   get:function(k,d){ try{ var v=localStorage.getItem(k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
@@ -1222,7 +1513,7 @@ var LS={
 
 function buildTabs(sec){
   var panes=[].slice.call(sec.querySelectorAll(".pane"));
-  if(!panes.length) return;
+  if(panes.length<2) return;
   var bar=document.createElement("div");
   bar.className="tabs"; bar.setAttribute("role","tablist");
   var saved=LS.get("delta.tab."+sec.id, 0);
@@ -1269,10 +1560,11 @@ function init(){
 
   /* progression */
   var done=LS.get("delta.done",{});
+  var revs=secs.filter(function(x){ return x.querySelector("[data-rev]"); });
   var bar=document.getElementById("pbar"), num=document.getElementById("pnum");
   function refresh(){
     var n=0;
-    secs.forEach(function(s){
+    revs.forEach(function(s){
       var k=s.id, on=!!done[k];
       s.querySelector("[data-rev]").checked=on;
       s.querySelector(".rev").classList.toggle("done",on);
@@ -1280,10 +1572,10 @@ function init(){
       if(a) a.classList.toggle("done",on);
       if(on) n++;
     });
-    bar.style.width=(n/secs.length*100)+"%";
-    num.textContent=n+"/"+secs.length;
+    bar.style.width=(n/revs.length*100)+"%";
+    num.textContent=n+"/"+revs.length;
   }
-  secs.forEach(function(s){
+  revs.forEach(function(s){
     s.querySelector("[data-rev]").addEventListener("change", function(e){
       done[s.id]=e.target.checked; LS.set("delta.done",done); refresh();
     });
@@ -1320,6 +1612,7 @@ function init(){
     var f=VIZ[el.dataset.viz]; if(f) f(el);
   });
   var ex=document.getElementById("explorer"); if(ex) explorer(ex);
+  var dt=document.getElementById("dtree"); if(dt) decisionTree(dt);
 
   renderMath(document);
 }

@@ -11,9 +11,19 @@ Chaque chapitre est découpé en parties, et chaque partie suit toujours le mêm
 | Onglet | Contenu |
 |---|---|
 | Cours | l'essentiel en quelques lignes, avec un schéma |
-| Formules | ce qu'il faut savoir par cœur, visualisé |
+| Formules | l'essentiel d'abord (carte bleue), le détail ensuite |
 | Exercices | 2 exercices-types courts, centrés sur la méthode, corrigés pas à pas |
 | Astuces | astuces, pièges classiques et réflexes de rédaction du bac |
+
+Et deux sections transverses, présentes dans **tous** les chapitres :
+
+- **Arbre de décision** (avant les parties) — on part de ce que demande
+  l'énoncé, on suit les conditions à vérifier, on arrive à la méthode.
+  Survoler une méthode affiche un micro-exemple. Les données de l'arbre
+  sont la constante `TREE` dans le `<script>` : une entrée par question
+  d'énoncé, des nœuds `q` (condition), `a` (cas) et `m` (méthode).
+- **Exercices mixtes** (après les parties) — dix questions courtes, toutes
+  parties mélangées, sans indication de méthode.
 
 ## Chapitres
 
