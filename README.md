@@ -30,10 +30,20 @@ Pour obtenir un fichier autonome, envoyable à quelqu'un et ouvrable dans
 n'importe quel navigateur sans compte ni connexion :
 
 ```sh
-./build.sh index.html "Delta - Suites numériques"
-# -> dist/Delta - Suites numériques.html
+./build.sh index.html "dist/Delta - Suites numériques.html"
 ```
 
 Le fichier produit est complet : styles, schémas et interactions inclus.
 Seules les polices web sont téléchargées si le navigateur a accès à
 internet ; sinon il bascule sur des polices système.
+
+## Site en ligne
+
+`docs/` contient le site publié par GitHub Pages. Il est **généré** — ne
+pas l'éditer à la main. Après chaque modification d'une fiche :
+
+```sh
+./build.sh index.html docs/index.html
+git add docs && git commit -m "Met à jour le site"
+git push
+```

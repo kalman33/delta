@@ -1,11 +1,12 @@
 #!/bin/sh
 # Emballe une fiche (format artifact : fragment HTML sans <head>) en un
 # fichier .html autonome, ouvrable dans n'importe quel navigateur.
-#   ./build.sh index.html "Delta - Suites numériques"
+#   ./build.sh index.html                       -> dist/index-autonome.html
+#   ./build.sh index.html docs/index.html      -> chemin explicite
 set -e
 SRC="${1:-index.html}"
-OUT="dist/${2:-$(basename "${SRC%.html}")-autonome}.html"
-mkdir -p dist
+OUT="${2:-dist/$(basename "${SRC%.html}")-autonome.html}"
+mkdir -p "$(dirname "$OUT")"
 {
   cat <<'HEAD'
 <!doctype html>
