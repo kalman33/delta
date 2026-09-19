@@ -22,3 +22,18 @@ Chaque chapitre est découpé en parties, et chaque partie suit toujours le mêm
 ## Ouvrir
 
 Ouvrir le fichier `.html` directement dans un navigateur.
+
+## Partager une fiche
+
+Les fiches sont écrites au format artifact (fragment HTML, sans `<head>`).
+Pour obtenir un fichier autonome, envoyable à quelqu'un et ouvrable dans
+n'importe quel navigateur sans compte ni connexion :
+
+```sh
+./build.sh index.html "Delta - Suites numériques"
+# -> dist/Delta - Suites numériques.html
+```
+
+Le fichier produit est complet : styles, schémas et interactions inclus.
+Seules les polices web sont téléchargées si le navigateur a accès à
+internet ; sinon il bascule sur des polices système.
