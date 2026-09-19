@@ -75,6 +75,10 @@ header.top{
 
 /* ---------- shell ---------- */
 .shell{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:0 96px;display:grid;grid-template-columns:212px minmax(0,1fr);gap:48px}
+.shell[data-nav="off"]{grid-template-columns:minmax(0,1fr);max-width:900px}
+.shell[data-nav="off"] nav.side{display:none}
+.tbtn[aria-expanded="false"]{color:var(--ink3)}
+.tbtn[aria-expanded="true"]{color:var(--accent);border-color:var(--accent-b);background:var(--accent-s)}
 @media(max-width:900px){.shell{display:block;padding-inline:16px}}
 nav.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 72px);align-self:start;padding-block:34px}
 nav.side .lbl{margin-bottom:12px}
@@ -241,6 +245,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
     <div class="crumb">Maths · Terminale 2026‑2027 &nbsp;—&nbsp; Chapitre : Suites numériques</div>
     <div class="top-right">
       <div class="prog"><span class="bar"><span id="pbar"></span></span><span id="pnum">0/7</span></div>
+      <button class="tbtn" id="navtog" aria-controls="toc" aria-expanded="true" aria-label="Afficher ou masquer le sommaire">☰</button>
       <button class="tbtn" id="theme" title="Changer de thème" aria-label="Changer de thème">◐</button>
     </div>
   </div>
@@ -1235,6 +1240,17 @@ function init(){
     li.innerHTML='<a href="#'+s.id+'" data-for="'+s.id+'"><span class="nn">'+s.dataset.num+'</span><span>'+s.dataset.title+'</span></a>';
     toc.appendChild(li);
   });
+
+  /* repli du sommaire */
+  var shell=document.querySelector(".shell"), navBtn=document.getElementById("navtog");
+  var navOn=LS.get("delta.nav",true);
+  function setNav(on){
+    shell.setAttribute("data-nav", on?"on":"off");
+    navBtn.setAttribute("aria-expanded", String(on));
+    navBtn.title = on ? "Masquer le sommaire" : "Afficher le sommaire";
+  }
+  setNav(navOn);
+  navBtn.addEventListener("click", function(){ navOn=!navOn; setNav(navOn); LS.set("delta.nav",navOn); });
 
   secs.forEach(buildTabs);
 
