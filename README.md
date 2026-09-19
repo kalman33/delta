@@ -17,7 +17,7 @@ Chaque chapitre est découpé en parties, et chaque partie suit toujours le mêm
 
 Et deux sections transverses, présentes dans **tous** les chapitres :
 
-- **Arbre de décision** (avant les parties) — on part de ce que demande
+- **Arbre de décision** (après les parties, avant les exercices mixtes) — on part de ce que demande
   l'énoncé, on repère la **forme** qu'on a sous les yeux, on lit la
   méthode en face. Survoler une méthode l'affiche sur un exemple.
   Données : `TREE` dans le `<script>`, une entrée par question d'énoncé,
