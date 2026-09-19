@@ -26,7 +26,13 @@ Et deux sections transverses, présentes dans **tous** les chapitres :
   vraiment d'une vérification supplémentaire.
   Règle d'écriture : **une branche doit se reconnaître à l'œil sur
   l'énoncé**, jamais demander un calcul préalable. Ce qui ne branche pas
-  va dans `RFLX`, la liste « sans se poser de question ».
+  va dans `RFLX`, la liste « les cas sans décision ».
+
+  Attention : `.m` est la classe du moteur mathématique, qui réécrit le
+  contenu de tout élément la portant. Ne jamais l'utiliser comme nom de
+  classe pour autre chose — les libellés de boutons portent `.lbl` et
+  s'écrivent en HTML ordinaire (`<sub>`, `<sup>`), pas en notation
+  `u_{n+1}`.
 - **Exercices mixtes** (après les parties) — dix questions courtes, toutes
   parties mélangées, sans indication de méthode.
 
