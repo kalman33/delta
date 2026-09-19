@@ -18,10 +18,15 @@ Chaque chapitre est découpé en parties, et chaque partie suit toujours le mêm
 Et deux sections transverses, présentes dans **tous** les chapitres :
 
 - **Arbre de décision** (avant les parties) — on part de ce que demande
-  l'énoncé, on suit les conditions à vérifier, on arrive à la méthode.
-  Survoler une méthode affiche un micro-exemple. Les données de l'arbre
-  sont la constante `TREE` dans le `<script>` : une entrée par question
-  d'énoncé, des nœuds `q` (condition), `a` (cas) et `m` (méthode).
+  l'énoncé, on repère la **forme** qu'on a sous les yeux, on lit la
+  méthode en face. Survoler une méthode l'affiche sur un exemple.
+  Données : `TREE` dans le `<script>`, une entrée par question d'énoncé,
+  chacune avec `look` (ce qu'on regarde) et des `cases` `{pat, note,
+  outs}` ; un `out` porte une `cond` seulement quand la méthode dépend
+  vraiment d'une vérification supplémentaire.
+  Règle d'écriture : **une branche doit se reconnaître à l'œil sur
+  l'énoncé**, jamais demander un calcul préalable. Ce qui ne branche pas
+  va dans `RFLX`, la liste « sans se poser de question ».
 - **Exercices mixtes** (après les parties) — dix questions courtes, toutes
   parties mélangées, sans indication de méthode.
 

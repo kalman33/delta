@@ -272,21 +272,36 @@ code.py em{color:var(--ink3);font-style:normal}
 .dbody{padding:16px 16px 18px}
 .dpanel{border-left:1px solid var(--line);background:var(--surface2);padding:16px}
 @media(max-width:780px){.dpanel{border-left:0;border-top:1px solid var(--line)}}
-.tree,.tree ul{list-style:none;margin:0;padding:0}
-.tree>ul{margin-left:0;padding-left:0;border-left:0}
-.tree>ul>li::before{display:none}
-.tree ul{margin-left:9px;padding-left:16px;border-left:1px solid var(--line2)}
-.tree li{position:relative;padding:2px 0}
-.tree ul>li::before{content:"";position:absolute;left:-16px;top:17px;width:11px;height:1px;background:var(--line2)}
-.nd{display:inline-flex;align-items:baseline;gap:7px;font-size:13.5px;line-height:1.45;padding:5px 10px;border-radius:8px;border:1px solid transparent;text-align:left}
-.nd.q{color:var(--ink);background:var(--surface2);border-color:var(--line);font-weight:500}
-.nd.q .mk{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--div);font-weight:600}
-.nd.a{color:var(--ink2);font-size:12.5px;padding-left:2px}
-.nd.a .mk{color:var(--ink3);font-family:'IBM Plex Mono',monospace;font-size:10px}
-button.nd.m{font-family:inherit;cursor:pointer;background:var(--conv-s);border-color:var(--conv-b);color:var(--conv);font-weight:500}
+.dlook{font-size:13px;color:var(--ink2);line-height:1.5;padding-left:11px;border-left:2px solid var(--accent);margin-bottom:6px}
+.dcase{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:14px;align-items:start;padding:13px 0;border-bottom:1px dashed var(--line)}
+.dcase:last-child{border-bottom:0;padding-bottom:0}
+@media(max-width:600px){.dcase{grid-template-columns:minmax(0,1fr);gap:8px}}
+.dpat{background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+.dpat .pl{display:flex;flex-wrap:wrap;gap:3px 14px;align-items:baseline}
+.dpat .m{font-size:1.14em}
+.dpat .pt{font-size:13.5px;color:var(--ink2);font-style:italic}
+.dpn{font-size:11.5px;color:var(--ink3);line-height:1.45;margin-top:5px}
+.dpn .m{font-size:1.02em;font-style:normal}
+.dout{display:flex;flex-direction:column;gap:9px;min-width:0}
+.dsub{display:flex;flex-direction:column;gap:4px;min-width:0}
+.cnd{display:flex;align-items:baseline;gap:6px;font-size:11.5px;line-height:1.35;color:var(--div);font-weight:500}
+.cnd::before{content:"si";font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--div-b);background:var(--div-s);border-radius:4px;padding:1px 4px;flex:none}
+.nd{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;line-height:1.4;padding:8px 11px;border-radius:8px;border:1px solid transparent;text-align:left}
+button.nd.m{font-family:inherit;cursor:pointer;width:100%;justify-content:space-between;background:var(--conv-s);border-color:var(--conv-b);color:var(--conv);font-weight:500}
 button.nd.m:hover{border-color:var(--conv);box-shadow:var(--shadow)}
 button.nd.m[aria-pressed="true"]{background:var(--conv);border-color:var(--conv);color:var(--on-accent)}
 .nd .ref{font-family:'IBM Plex Mono',monospace;font-size:10px;opacity:.7;flex:none}
+
+/* réflexes sans branchement */
+.rflx{border-top:1px solid var(--line);background:var(--surface2);padding:16px 18px}
+.rflx h4{font-family:'Newsreader',Georgia,serif;font-size:16px;font-weight:600}
+.rflx .rsub{font-size:12.5px;color:var(--ink3);margin:2px 0 10px}
+.rrow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:14px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px;line-height:1.5}
+.rrow:last-child{border-bottom:0;padding-bottom:0}
+@media(max-width:600px){.rrow{grid-template-columns:minmax(0,1fr);gap:3px;padding:10px 0}}
+.rrow .tg{color:var(--ink2)}
+.rrow .do{color:var(--ink);display:flex;gap:9px;align-items:baseline;justify-content:space-between}
+.rrow .do .ref{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);flex:none}
 .dpanel .pk{font-size:15px;font-weight:600;margin:7px 0 2px;line-height:1.35}
 .dpanel .pref{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
 .dpanel .exq{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-top:12px}
@@ -346,10 +361,10 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
 <section class="part" id="pq" data-num="?" data-title="Que faire&nbsp;?">
   <div class="phead">
     <div class="num">?</div>
-    <div><h2>Arbre de décision</h2><div class="sub">On me demande quoi&nbsp;? → qu'est-ce que je vérifie&nbsp;? → quelle méthode j'applique</div></div>
+    <div><h2>Arbre de décision</h2><div class="sub">Ce qu'on me demande → ce que je vois dans l'énoncé → la méthode qui va avec</div></div>
   </div>
   <div class="pane">
-    <p class="ftop">Le réflexe quand on sèche : partir de <b>ce qui est demandé</b>, pas de ce qu'on se rappelle. Choisissez la question de l'énoncé, suivez les branches, survolez une méthode verte pour en voir un micro-exemple.</p>
+    <p class="ftop">Le réflexe quand on sèche : partir de <b>ce qui est demandé</b>, pas de ce dont on se souvient. Choisissez la question, puis repérez dans la colonne de gauche la forme que vous avez sous les yeux — il n'y a rien à calculer pour choisir. Survolez une méthode verte pour la voir sur un exemple.</p>
     <div class="dtree" id="dtree"></div>
   </div>
 </section>
@@ -1324,184 +1339,156 @@ function explorer(el){
 
 /* ---------------- arbre de décision ---------------- */
 function M(x){ return '<span class="m">'+x+'</span>'; }
+
 var TREE=[
-{g:"Calculer une limite", t:[
-  {q:"L’expression contient "+M("(−1)^n")+", "+M("sin(n)")+" ou "+M("cos(n)")+" ?", c:[
-    {a:"Oui · la limite attendue est finie", c:[
-      {m:"Théorème des gendarmes", ref:"05", note:"Encadrer, puis vérifier que les deux bornes ont bien la <b>même</b> limite.",
-       ex:{q:"−@{1}{n} ≤ @{sin(n)}{n} ≤ @{1}{n}", r:"lim = 0"}}]},
-    {a:"Oui · la limite attendue est infinie", c:[
-      {m:"Théorème de comparaison", ref:"05", note:"Une seule inégalité suffit : on pousse par en dessous, ou on écrase par au-dessus.",
-       ex:{q:"n + (−1)^n ≥ n − 1", r:"lim = +∞"}}]}]},
-  {q:"Le calcul direct donne une forme indéterminée ?", c:[
-    {a:"Non", c:[{m:"Opérations sur les limites", ref:"04", ex:{q:"2 + @{1}{n}", r:"lim = 2"}}]},
-    {a:"Oui · quotient de polynômes", c:[
-      {m:"Factoriser par le terme de plus haut degré", ref:"04", note:"Raccourci de vérification : le quotient des termes dominants.",
-       ex:{q:"@{3n² − n}{n² + 5} = @{3 − @{1}{n}}{1 + @{5}{n²}}", r:"lim = 3"}}]},
-    {a:"Oui · une racine dans une différence", c:[
-      {m:"Multiplier par la quantité conjuguée", ref:"04", note:"Réflexe automatique dès qu’un √ apparaît dans une forme ∞ − ∞.",
-       ex:{q:"√(n+1) − √n = @{1}{√(n+1) + √n}", r:"lim = 0"}}]}]},
-  {q:"Une puissance "+M("q^n")+" apparaît ?", c:[
-    {m:"Tableau des limites de q puissance n", ref:"05", note:"Les quatre cas : q &gt; 1, q = 1, −1 &lt; q &lt; 1, q ≤ −1.",
-     ex:{q:"−1 &lt; 0,5 &lt; 1", r:"0,5^n → 0"}}]}]},
+{g:"Calculer une limite", look:"Je regarde à quoi ressemble l’expression de "+M("u_n")+".", cases:[
+  {pat:["(−1)^n","sin(n)","cos(n)"], note:"un morceau borné qu’on ne sait pas calculer", outs:[
+    {cond:"la limite attendue est finie", m:"Encadrer, puis gendarmes", ref:"05",
+     ex:{q:"−@{1}{n} ≤ @{sin(n)}{n} ≤ @{1}{n}", r:"lim = 0"}},
+    {cond:"la limite attendue est infinie", m:"Minorer d’un seul côté : comparaison", ref:"05",
+     ex:{q:"n + (−1)^n ≥ n − 1", r:"lim = +∞"}}]},
+  {pat:["q^n"], note:"une puissance : "+M("0,5^n")+" , "+M("3^n")+" , "+M("(@{2}{3})^n")+" ...", outs:[
+    {m:"Tableau des limites de q^n", ref:"05", warn:"Quatre cas, selon la position de q par rapport à 1 et −1.",
+     ex:{q:"−1 &lt; 0,5 &lt; 1", r:"0,5^n → 0"}}]},
+  {pat:["@{3n² − n}{n² + 5}"], note:"un quotient de polynômes en "+M("n"), outs:[
+    {m:"Factoriser par le terme de plus haut degré", ref:"04",
+     ex:{q:"@{n²(3 − @{1}{n})}{n²(1 + @{5}{n²})}", r:"lim = 3"}}]},
+  {pat:["√(n+1) − √n"], note:"une différence qui contient une racine", outs:[
+    {m:"Multiplier par la quantité conjuguée", ref:"04",
+     ex:{q:"@{(n+1) − n}{√(n+1) + √n}", r:"lim = 0"}}]},
+  {pat:["aucun de ces cas"], plain:true, note:"l’expression se calcule morceau par morceau", outs:[
+    {m:"Opérations sur les limites", ref:"04", warn:"Si le calcul donne ∞ − ∞, 0 × ∞, ∞/∞ ou 0/0, remonter aux cas du dessus.",
+     ex:{q:"2 + @{1}{n}", r:"lim = 2"}}]}
+]},
 
-{g:"Montrer qu’une suite converge", t:[
-  {q:"Connaît-on la formule explicite de "+M("u_n")+" ?", c:[
-    {a:"Oui", c:[{m:"Calculer la limite directement", ref:"04", note:"On retombe sur « Calculer une limite ».",
-       ex:{q:"u_n = 6 − 4 × 0,5^n", r:"lim = 6"}}]},
-    {a:"Non · suite définie par récurrence", c:[
-      {q:"Est-elle monotone ET bornée du bon côté ?", c:[
-        {a:"Croissante et majorée", c:[
-          {m:"Théorème de la convergence monotone", ref:"06", note:"Il donne l’<b>existence</b> de la limite, jamais sa valeur : ℓ ≤ M, mais ℓ ≠ M en général.",
-           ex:{q:"u_n ≤ 6 et (u_n) croissante", r:"converge vers ℓ ≤ 6"}}]},
-        {a:"Décroissante et minorée", c:[
-          {m:"Théorème de la convergence monotone", ref:"06", note:"Version symétrique : elle descend, le plancher l’arrête.",
-           ex:{q:"u_n ≥ 0 et (u_n) décroissante", r:"converge vers ℓ ≥ 0"}}]},
-        {a:"On ne sait pas encore", c:[
-          {m:"1. Majorer par récurrence · 2. Signe de u_{n+1} − u_n", ref:"03", note:"C’est l’ordre imposé par les sujets : d’abord la borne, ensuite la monotonie.",
-           ex:{q:"u_n ≤ 6 puis u_{n+1} − u_n = 0,5(6 − u_n)", r:"croissante et majorée"}}]}]}]}]},
-  {q:"La convergence est acquise — reste la valeur", c:[
-    {m:"Point fixe : résoudre ℓ = f(ℓ)", ref:"06", note:"Valable <b>seulement</b> après avoir prouvé que la suite converge.",
-     ex:{q:"ℓ = 0,5ℓ + 3", r:"ℓ = 6"}},
-    {m:"Suite auxiliaire v_n = u_n − ℓ", ref:"07", note:"Plus long, mais donne en prime la formule explicite et les seuils.",
-     ex:{q:"v_n = −4 × 0,5^n", r:"u_n = 6 − 4 × 0,5^n"}}]}]},
+{g:"Montrer qu’une suite converge", look:"Je regarde ce dont je dispose <b>déjà</b> — c’est l’ordre des questions du sujet.", cases:[
+  {pat:["j’ai la formule explicite de u_n"], plain:true, note:"elle est donnée, ou démontrée à la question d’avant", outs:[
+    {m:"Calculer la limite directement", ref:"04", warn:"On retombe alors sur « Calculer une limite ».",
+     ex:{q:"u_n = 6 − 4 × 0,5^n", r:"lim = 6"}}]},
+  {pat:["u_n ≤ M"], note:"la suite est majorée, et elle monte", outs:[
+    {m:"Théorème de la convergence monotone", ref:"06", warn:"Il prouve que la limite <b>existe</b> : ℓ ≤ M, mais ℓ n’est pas M.",
+     ex:{q:"croissante et u_n ≤ 6", r:"converge vers ℓ ≤ 6"}}]},
+  {pat:["u_n ≥ m"], note:"la suite est minorée, et elle descend", outs:[
+    {m:"Théorème de la convergence monotone", ref:"06",
+     ex:{q:"décroissante et u_n ≥ 0", r:"converge vers ℓ ≥ 0"}}]},
+  {pat:["je n’ai encore rien démontré"], plain:true, note:"ni borne, ni sens de variation", outs:[
+    {m:"1. Majorer par récurrence · 2. Signe de u_{n+1} − u_n", ref:"03",
+     ex:{q:"u_n ≤ 6 puis u_{n+1} − u_n = 0,5(6 − u_n)", r:"croissante et majorée"}}]},
+  {pat:["la convergence est acquise"], plain:true, note:"il reste à trouver la valeur de "+M("ℓ"), outs:[
+    {cond:"l’énoncé fait poser v_n = u_n − ℓ", m:"Suite auxiliaire", ref:"07",
+     ex:{q:"v_n = −4 × 0,5^n", r:"u_n = 6 − 4 × 0,5^n"}},
+    {cond:"rien n’est imposé", m:"Point fixe : résoudre ℓ = f(ℓ)", ref:"06",
+     ex:{q:"ℓ = 0,5ℓ + 3", r:"ℓ = 6"}}]}
+]},
 
-{g:"Démontrer une propriété pour tout n", t:[
-  {q:"La propriété doit valoir pour tout entier "+M("n")+" ?", c:[
-    {a:"Oui — c’est presque toujours le cas", c:[
-      {m:"Raisonnement par récurrence", ref:"03", note:"Initialisation · Hérédité · Conclusion. Les trois sont notées séparément.",
-       ex:{q:"P(0) vraie et P(n) ⟹ P(n+1)", r:"P(n) vraie pour tout n"}}]}]},
-  {q:"Quelle est la forme de la propriété ?", c:[
-    {a:"Une inégalité", c:[
-      {m:"Partir de l’hypothèse, lui appliquer les opérations qui fabriquent u_{n+1}", ref:"03",
-       note:"On <b>part</b> de l’hypothèse, on ne part jamais du résultat à démontrer.",
-       ex:{q:"u_n ≤ 6 ⟹ 0,5u_n + 3 ≤ 6", r:"u_{n+1} ≤ 6"}}]},
-    {a:"Une égalité (formule explicite)", c:[
-      {m:"Partir de u_{n+1}, remplacer par la récurrence, injecter l’hypothèse", ref:"03",
-       ex:{q:"0,5(6 − 4 × 0,5^n) + 3", r:"6 − 4 × 0,5^{n+1}"}}]}]}]},
+{g:"Trouver la formule explicite", look:"Je regarde la <b>relation de récurrence</b> donnée par l’énoncé.", cases:[
+  {pat:["u_{n+1} = u_n + r"], note:"on ajoute toujours le même nombre", outs:[
+    {m:"Arithmétique : u_n = u_0 + nr", ref:"02", ex:{q:"u_0 = 5 , r = −3", r:"u_n = 5 − 3n"}}]},
+  {pat:["u_{n+1} = q × u_n"], note:"on multiplie toujours par le même nombre", outs:[
+    {m:"Géométrique : u_n = u_0 q^n", ref:"02", ex:{q:"u_0 = 6 , q = 2", r:"u_n = 6 × 2^n"}}]},
+  {pat:["u_{n+1} = a u_n + b"], note:"une multiplication ET une addition", outs:[
+    {m:"Suite auxiliaire v_n = u_n − ℓ, avec ℓ = aℓ + b", ref:"07",
+     warn:"Le ℓ que l’énoncé fait poser est aussi la limite : vous connaissez la réponse avant de commencer.",
+     ex:{q:"u_{n+1} = 0,5u_n + 3 , ℓ = 6", r:"u_n = (u_0 − 6) × 0,5^n + 6"}}]},
+  {pat:["u_{n+1} = f(u_n)"], note:"aucune des trois formes ci-dessus", outs:[
+    {m:"Calculer les premiers termes, conjecturer, démontrer par récurrence", ref:"03",
+     ex:{q:"2 ; 4 ; 5 ; 5,5 ...", r:"conjecture puis récurrence"}}]}
+]},
 
-{g:"Trouver la formule explicite", t:[
-  {q:"Quelle est la relation de récurrence ?", c:[
-    {a:M("u_{n+1} = u_n + r"), c:[
-      {m:"Arithmétique : u_n = u_0 + nr", ref:"02", ex:{q:"u_0 = 5 , r = −3", r:"u_n = 5 − 3n"}}]},
-    {a:M("u_{n+1} = q u_n"), c:[
-      {m:"Géométrique : u_n = u_0 q^n", ref:"02", ex:{q:"u_0 = 6 , q = 2", r:"u_n = 6 × 2^n"}}]},
-    {a:M("u_{n+1} = a u_n + b"), c:[
-      {m:"Suite auxiliaire v_n = u_n − ℓ, avec ℓ = aℓ + b", ref:"07",
-       note:"L’énoncé donne presque toujours le v_n à poser — et ce ℓ est la limite.",
-       ex:{q:"u_{n+1} = 0,5u_n + 3 , ℓ = 6", r:"u_n = (u_0 − 6) × 0,5^n + 6"}}]},
-    {a:"Aucune des trois", c:[
-      {m:"Calculer les premiers termes, conjecturer, démontrer par récurrence", ref:"03",
-       ex:{q:"u_0 , u_1 , u_2 , u_3", r:"conjecture puis récurrence"}}]}]}]},
+{g:"Étudier le sens de variation", look:"Je regarde <b>comment la suite est définie</b>.", cases:[
+  {pat:["u_n = f(n)"], note:"formule explicite : un "+M("n")+", pas de "+M("u_n"), outs:[
+    {cond:"f est simple à dériver", m:"Étudier les variations de f sur [0 ; +∞[", ref:"01",
+     ex:{q:"f(x) = @{x}{x+1} croissante", r:"(u_n) croissante"}},
+    {cond:"sinon, ou en cas de doute", m:"Signe de u_{n+1} − u_n", ref:"01",
+     ex:{q:"@{n+1}{n+2} − @{n}{n+1} = @{1}{(n+1)(n+2)}", r:"croissante"}}]},
+  {pat:["u_{n+1} = f(u_n)"], note:"définie par récurrence", outs:[
+    {m:"Signe de u_{n+1} − u_n, en réutilisant un encadrement déjà démontré", ref:"06",
+     warn:"Ne jamais dériver une suite définie par récurrence : la dérivée n’existe que pour les fonctions.",
+     ex:{q:"u_{n+1} − u_n = 0,5(6 − u_n) et u_n ≤ 6", r:"croissante"}}]},
+  {pat:["u_n &gt; 0"], note:"tous les termes positifs, et des puissances dans l’expression", outs:[
+    {m:"Comparer le quotient u_{n+1} / u_n à 1", ref:"01",
+     ex:{q:"@{u_{n+1}}{u_n} = 2 &gt; 1", r:"croissante"}}]}
+]}
+];
 
-{g:"Étudier le sens de variation", t:[
-  {q:"Comment la suite est-elle définie ?", c:[
-    {a:"Explicitement, "+M("u_n = f(n)"), c:[
-      {m:"Étudier les variations de f sur [0 ; +∞[", ref:"01", note:"Possible uniquement pour une suite <b>explicite</b>.",
-       ex:{q:"f(x) = @{x}{x+1} croissante", r:"(u_n) croissante"}},
-      {m:"Ou : signe de u_{n+1} − u_n", ref:"01", note:"Méthode universelle, elle marche dans tous les cas.",
-       ex:{q:"@{n+1}{n+2} − @{n}{n+1} = @{1}{(n+1)(n+2)}", r:"croissante"}}]},
-    {a:"Par récurrence, "+M("u_{n+1} = f(u_n)"), c:[
-      {m:"Signe de u_{n+1} − u_n, en réutilisant un encadrement déjà démontré", ref:"06",
-       note:"Ne jamais dériver une suite définie par récurrence : la dérivée n’existe que pour les fonctions.",
-       ex:{q:"u_{n+1} − u_n = 0,5(6 − u_n) et u_n ≤ 6", r:"croissante"}}]}]},
-  {q:"Termes strictement positifs, avec des puissances ?", c:[
-    {m:"Comparer le quotient u_{n+1} / u_n à 1", ref:"01", note:"Le quotient se simplifie tout seul quand il y a des puissances.",
-     ex:{q:"@{u_{n+1}}{u_n} = 2 &gt; 1", r:"croissante"}}]}]},
-
-{g:"Calculer une somme de termes", t:[
-  {q:"De quel type sont les termes additionnés ?", c:[
-    {a:"Arithmétiques", c:[
-      {m:"nb de termes × (premier + dernier) / 2", ref:"02",
-       ex:{q:"1 + 2 + ... + 100", r:"@{100 × 101}{2} = 5 050"}}]},
-    {a:"Géométriques", c:[
-      {m:"premier terme × (1 − q^nb) / (1 − q)", ref:"02", note:"Une seule formule à retenir : elle marche quel que soit l’indice de départ.",
-       ex:{q:"5 + 5×3 + ... + 5×3^{10}", r:"442 865"}}]}]},
-  {q:"Avant tout calcul", c:[
-    {m:"Compter : dernier indice − premier indice + 1", ref:"02", note:"L’erreur la plus fréquente du chapitre.",
-     ex:{q:"de u_3 à u_{20}", r:"18 termes"}}]}]},
-
-{g:"Trouver un seuil", t:[
-  {q:"A-t-on la formule explicite de "+M("u_n")+" ?", c:[
-    {a:"Oui", c:[
-      {m:"Résoudre l’inéquation", ref:"07", note:"Diviser par un nombre négatif <b>inverse</b> le sens de l’inégalité.",
-       ex:{q:"6 − 4 × 0,5^n &gt; 5,9", r:"n = 6"}}]},
-    {a:"Non", c:[
-      {m:"Écrire un algorithme : boucle while", ref:"07", note:"Jamais une boucle <b>for</b> : le nombre de tours est justement ce qu’on cherche.",
-       ex:{q:"while u ≤ 5,9 : u = 0,5u + 3", r:"n = 6"}}]}]}]},
-
-{g:"Montrer qu’elle est arithmétique ou géométrique", t:[
-  {q:"Que donne le calcul, une fois simplifié ?", c:[
-    {a:M("u_{n+1} − u_n")+" est une constante", c:[
-      {m:"Arithmétique, de raison cette constante", ref:"02",
-       ex:{q:"5 − 3(n+1) − (5 − 3n)", r:"r = −3"}}]},
-    {a:M("@{u_{n+1}}{u_n}")+" est une constante", c:[
-      {m:"Géométrique, de raison cette constante", ref:"02", note:"Vérifier d’abord que les termes sont tous non nuls.",
-       ex:{q:"@{3 × 2^{n+2}}{3 × 2^{n+1}}", r:"q = 2"}}]},
-    {a:"Le résultat contient encore "+M("n"), c:[
-      {m:"Ni l’une ni l’autre — chercher une suite auxiliaire", ref:"07",
-       note:"Cas typique de u_{n+1} = a u_n + b.",
-       ex:{q:"v_n = u_n − ℓ", r:"(v_n) géométrique"}}]}]}]}
+var RFLX=[
+ {see:"« pour tout entier "+M("n")+" » dans l’énoncé",
+  act:"Raisonnement par récurrence — Initialisation · Hérédité · Conclusion", ref:"03"},
+ {see:"« montrer que "+M("(u_n)")+" est arithmétique / géométrique »",
+  act:"Calculer "+M("u_{n+1} − u_n")+" (ou le quotient) et vérifier qu’il ne reste plus de "+M("n"), ref:"02"},
+ {see:"une somme "+M("u_p + u_{p+1} + ... + u_n"),
+  act:"premier × "+M("@{1 − q^{nb}}{1 − q}")+" si géométrique, nb × "+M("@{premier + dernier}{2}")+" si arithmétique — avec nb = dernier − premier + 1", ref:"02"},
+ {see:"« le plus petit entier "+M("n")+" tel que ... »",
+  act:"Formule explicite connue → résoudre l’inéquation. Sinon → boucle <span class=\"mono\">while</span>", ref:"07"}
 ];
 
 function decisionTree(root){
-  var gi=0, leaves=[], cur=0;
+  var gi=0, leaves=[];
   root.innerHTML='<div class="goals" role="group" aria-label="Ce que demande l’énoncé"></div>'
-    + '<div class="dwrap"><div class="dbody"><div class="tree" id="dtree-body"></div></div>'
-    + '<div class="dpanel" id="dtree-panel"></div></div>';
-  var goals=root.querySelector(".goals"), body=root.querySelector("#dtree-body"), panel=root.querySelector("#dtree-panel");
+    + '<div class="dwrap"><div class="dbody"></div><div class="dpanel"></div></div>'
+    + '<div class="rflx"></div>';
+  var goals=root.querySelector(".goals"), body=root.querySelector(".dbody"),
+      panel=root.querySelector(".dpanel"), rflx=root.querySelector(".rflx");
 
   TREE.forEach(function(g,i){
     var b=document.createElement("button");
-    b.type="button"; b.textContent=g.g; b.setAttribute("aria-pressed", String(i===0));
+    b.type="button"; b.textContent=g.g;
     b.addEventListener("click", function(){ gi=i; render(); });
     goals.appendChild(b);
   });
 
-  function walk(list){
-    return '<ul>'+list.map(function(n){
-      if(n.m){
-        leaves.push(n);
-        return '<li><button type="button" class="nd m" data-i="'+(leaves.length-1)+'" aria-pressed="false">'
-          + '<span>'+n.m+'</span><span class="ref">'+n.ref+'</span></button></li>';
-      }
-      var isQ=!!n.q;
-      return '<li><span class="nd '+(isQ?"q":"a")+'"><span class="mk">'+(isQ?"?":"→")+'</span>'
-        + '<span>'+(n.q||n.a)+'</span></span>'+(n.c?walk(n.c):'')+'</li>';
-    }).join("")+'</ul>';
+  function caseHTML(c){
+    var pat = c.plain
+      ? '<span class="pt">'+c.pat.join('</span><span class="pt">')+'</span>'
+      : c.pat.map(function(x){ return '<span class="m">'+x+'</span>'; }).join('');
+    var outs = c.outs.map(function(o){
+      leaves.push(o);
+      var btn='<button type="button" class="nd m" data-i="'+(leaves.length-1)+'" aria-pressed="false">'
+        + '<span>'+o.m+'</span><span class="ref">'+o.ref+'</span></button>';
+      return o.cond ? '<div class="dsub"><span class="cnd">'+o.cond+'</span>'+btn+'</div>' : btn;
+    }).join("");
+    return '<div class="dcase"><div class="dpat"><div class="pl">'+pat+'</div>'
+      + (c.note ? '<div class="dpn">'+c.note+'</div>' : '')
+      + '</div><div class="dout">'+outs+'</div></div>';
   }
+
   function showLeaf(i){
     var n=leaves[i]; if(!n) return;
-    cur=i;
     body.querySelectorAll("button.nd.m").forEach(function(b){
       b.setAttribute("aria-pressed", String(parseInt(b.dataset.i,10)===i));
     });
     panel.innerHTML='<div class="pref">Méthode · partie '+n.ref+'</div>'
       + '<div class="pk">'+n.m+'</div>'
-      + '<div class="exq"><span class="lb">Micro-exemple</span>'
+      + '<div class="exq"><span class="lb">Sur un exemple</span>'
       +   '<span class="m">'+n.ex.q+'</span><span class="ar">→</span><span class="m">'+n.ex.r+'</span></div>'
-      + (n.note?'<div class="hint">'+n.note+'</div>':'');
+      + (n.warn ? '<div class="hint">'+n.warn+'</div>' : '');
     renderMath(panel);
   }
+
   function render(){
     leaves=[];
     [].slice.call(goals.children).forEach(function(b,i){ b.setAttribute("aria-pressed", String(i===gi)); });
-    body.innerHTML=walk(TREE[gi].t);
+    body.innerHTML='<div class="dlook">'+TREE[gi].look+'</div>'
+      + TREE[gi].cases.map(caseHTML).join("");
     renderMath(body);
     showLeaf(0);
   }
-  body.addEventListener("mouseover", function(e){
-    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
-    if(b) showLeaf(parseInt(b.dataset.i,10));
+
+  ["mouseover","focusin","click"].forEach(function(evt){
+    body.addEventListener(evt, function(e){
+      var b=e.target.closest ? e.target.closest("button.nd.m") : null;
+      if(b) showLeaf(parseInt(b.dataset.i,10));
+    });
   });
-  body.addEventListener("focusin", function(e){
-    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
-    if(b) showLeaf(parseInt(b.dataset.i,10));
-  });
-  body.addEventListener("click", function(e){
-    var b=e.target.closest ? e.target.closest("button.nd.m") : null;
-    if(b) showLeaf(parseInt(b.dataset.i,10));
-  });
+
+  rflx.innerHTML='<h4>Sans se poser de question</h4>'
+    + '<p class="rsub">Ces quatre-là ne dépendent de rien : la formulation de l’énoncé donne directement la méthode.</p>'
+    + RFLX.map(function(r){
+        return '<div class="rrow"><div class="tg">'+r.see+'</div>'
+          + '<div class="do">'+r.act+'<span class="ref">'+r.ref+'</span></div></div>';
+      }).join("");
+  renderMath(rflx);
+
   render();
 }
 
