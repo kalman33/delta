@@ -36,6 +36,10 @@ Et deux sections transverses, présentes dans **tous** les chapitres :
 - **Exercices mixtes** (après les parties) — dix questions courtes, toutes
   parties mélangées, sans indication de méthode.
 
+Cocher **Révisé** replie la partie comme un accordéon : au fil de la révision, il
+ne reste à l'écran que ce qui n'est pas encore acquis. Le chevron permet de
+replier ou rouvrir n'importe quelle partie à la main, et ce choix est mémorisé.
+
 ## Chapitres
 
 - [x] `index.html` — **Suites numériques** (7 parties)

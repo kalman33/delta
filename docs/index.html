@@ -101,7 +101,7 @@ nav.side a{
 nav.side a:hover{background:var(--surface2);color:var(--ink)}
 nav.side a.on{color:var(--ink);background:var(--surface);border-left-color:var(--accent);font-weight:500;box-shadow:var(--shadow)}
 nav.side a .nn{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3)}
-nav.side a.done .nn::after{content:"✓";color:var(--conv);margin-left:1px}
+nav.side a.done .nn::after{content:"✓";color:var(--conv);font-size:11px;letter-spacing:0}
 nav.side a.done .nn{font-size:0}
 @media(max-width:900px){
   nav.side{position:static;padding-block:18px 4px}
@@ -136,6 +136,17 @@ section.part{
 .rev input{accent-color:var(--conv);margin:0;cursor:pointer}
 .rev.done{color:var(--conv);border-color:var(--conv-b);background:var(--conv-s)}
 @media(max-width:620px){.rev span{display:none}}
+
+.pfold{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease}
+.pbody{overflow:hidden;min-height:0}
+section.part[data-fold="0"] .pfold{grid-template-rows:0fr}
+section.part[data-fold="0"] .pbody{visibility:hidden;transition:visibility 0s .3s}
+section.part[data-fold="0"] .phead{padding-bottom:20px}
+.foldb{flex:none;margin-left:10px;width:28px;height:28px;border:1px solid var(--line);background:var(--surface2);color:var(--ink3);border-radius:8px;cursor:pointer;display:grid;place-items:center;font-size:11px;line-height:1;transition:transform .25s ease,color .2s,border-color .2s}
+.foldb:hover{color:var(--ink);border-color:var(--accent-b)}
+section.part[data-fold="0"] .foldb{transform:rotate(-90deg)}
+.phead{cursor:pointer}
+.phead .rev,.phead .foldb{cursor:pointer}
 
 .tabs{display:flex;gap:2px;padding:16px 22px 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
@@ -1556,8 +1567,57 @@ function init(){
 
   secs.forEach(buildTabs);
 
-  /* progression */
+  /* accordéon : chaque partie se replie, et se replie toute seule une fois révisée */
   var done=LS.get("delta.done",{});
+  var folds=LS.get("delta.fold",{});
+
+  function setFold(sec, open, remember){
+    sec.dataset.fold = open ? "1" : "0";
+    var b=sec.querySelector(".foldb");
+    if(b){
+      b.setAttribute("aria-expanded", String(open));
+      b.title = open ? "Replier cette partie" : "Déplier cette partie";
+    }
+    if(remember!==false){ folds[sec.id]=open?1:0; LS.set("delta.fold",folds); }
+  }
+
+  secs.forEach(function(sec){
+    var kids=[].slice.call(sec.children).filter(function(el){
+      return el.classList.contains("tabs")||el.classList.contains("pane");
+    });
+    if(!kids.length) return;
+    var wrap=document.createElement("div"); wrap.className="pfold";
+    var inner=document.createElement("div"); inner.className="pbody"; inner.id=sec.id+"-body";
+    kids.forEach(function(k){ inner.appendChild(k); });
+    wrap.appendChild(inner); sec.appendChild(wrap);
+
+    var head=sec.querySelector(".phead");
+    var btn=document.createElement("button");
+    btn.type="button"; btn.className="foldb";
+    btn.setAttribute("aria-controls", inner.id);
+    btn.setAttribute("aria-label", "Déplier ou replier « "+(sec.dataset.title||"")+" »");
+    btn.innerHTML='<span aria-hidden="true">▾</span>';
+    head.appendChild(btn);
+
+    head.addEventListener("click", function(e){
+      if(e.target.closest(".rev")) return;
+      if(String(window.getSelection())) return;
+      setFold(sec, sec.dataset.fold==="0");
+    });
+
+    var open = (sec.id in folds) ? !!folds[sec.id] : !done[sec.id];
+    setFold(sec, open, false);
+  });
+
+  /* un lien interne vers une partie repliée la rouvre */
+  document.addEventListener("click", function(e){
+    var a=e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if(!a) return;
+    var t=document.getElementById(a.getAttribute("href").slice(1));
+    if(t && t.classList.contains("part")) setFold(t, true);
+  });
+
+  /* progression */
   var revs=secs.filter(function(x){ return x.querySelector("[data-rev]"); });
   var bar=document.getElementById("pbar"), num=document.getElementById("pnum");
   function refresh(){
@@ -1576,6 +1636,7 @@ function init(){
   revs.forEach(function(s){
     s.querySelector("[data-rev]").addEventListener("change", function(e){
       done[s.id]=e.target.checked; LS.set("delta.done",done); refresh();
+      setFold(s, !e.target.checked);
     });
   });
   refresh();
