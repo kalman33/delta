@@ -169,7 +169,7 @@ ul.clean>li::before{content:"";position:absolute;left:0;top:.62em;width:6px;heig
 /* formula block */
 .fbox{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;background:var(--surface2);padding:14px 16px}
 .fbox .cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:9px}
-.fbox .m{display:block;margin:6px 0}
+.fbox>.m{display:block;margin:6px 0}
 .fbox .note{font-size:13px;color:var(--ink2);margin-top:9px}
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
 .fgrid .fbox{border-radius:10px;border-left-width:3px}
@@ -258,7 +258,7 @@ code.py em{color:var(--ink3);font-style:normal}
 
 /* ---------- carte formule clé ---------- */
 .fbox.key{background:var(--accent-s);border-color:var(--accent-b);border-left-color:var(--accent)}
-.fbox.key .m{font-size:1.32em}
+.fbox.key>.m{font-size:1.32em}
 .fbox.key .cap{color:var(--accent)}
 .ftop{font-size:13.5px;color:var(--ink2);border-left:2px solid var(--line2);padding-left:11px}
 
@@ -482,12 +482,55 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
     </ul>
 
     <h3>Comment les reconnaître</h3>
-    <p>On ne devine pas, on calcule :</p>
+    <p>Deux tests existent : la <b>différence</b> et le <b>quotient</b>. On n'en fait pas deux, on choisit — et c'est l'énoncé qui le dit, en montrant <b>comment un terme est fabriqué à partir du précédent</b>.</p>
+    <ul class="clean">
+      <li>On <b>ajoute</b> ou on <b>retranche</b> un nombre (<span class="m">u_{n+1} = u_n − 4</span>), ou la forme explicite est du <b>premier degré</b> en <span class="m">n</span> (<span class="m">u_n = 5n + 2</span>) → on teste la <b>différence</b>.</li>
+      <li>On <b>multiplie</b> ou on <b>divise</b> par un nombre (<span class="m">u_{n+1} = 3u_n</span>), ou <span class="m">n</span> est en <b>exposant</b> (<span class="m">u_n = 3 × 2^n</span>) → on teste le <b>quotient</b>.</li>
+    </ul>
+    <p>Le test choisi, on calcule — on ne devine pas :</p>
     <ul class="clean">
       <li>Si <span class="m">u_{n+1} − u_n</span> donne un nombre <b>constant</b> (sans <span class="m">n</span> dedans) → arithmétique de raison ce nombre.</li>
       <li>Si <span class="m">@{u_{n+1}}{u_n}</span> donne un nombre <b>constant</b> → géométrique de raison ce nombre.</li>
     </ul>
+    <p>En cas de doute, commencez par la différence : elle est plus courte à écrire. S'il reste un <span class="m">n</span> dans le résultat, passez au quotient — qui exige en plus que tous les termes soient <b>non nuls</b>.</p>
     <p>Attention : il faut que ce soit vrai <b>pour tout</b> <span class="m">n</span>, pas seulement sur les trois premiers termes.</p>
+    <div class="fbox">
+      <div class="cap">Et si ce n'est ni l'un ni l'autre ?</div>
+      <div class="note" style="margin-top:0">C'est le cas le plus fréquent au bac. Le fil rouge <span class="m">u_{n+1} = 0,5 u_n + 3</span> mélange une multiplication <b>et</b> une addition : la différence <span class="m">u_{n+1} − u_n = −0,5 u_n + 3</span> n'est pas constante, elle dépend encore de <span class="m">u_n</span> ; le quotient non plus. Cette suite n'est <b>ni</b> arithmétique <b>ni</b> géométrique — et c'est exactement pour celles-là qu'on fabrique une <b>suite auxiliaire</b> (partie 07).</div>
+    </div>
+
+    <h3>Réécrire la suite quand on connaît <span class="m">u_0</span> et la raison</h3>
+    <p>La relation de récurrence ne livre les termes qu'<b>un par un</b> : pour obtenir <span class="m">u_{50}</span>, il faudrait cinquante calculs. La <b>formule explicite</b>, elle, donne <span class="m">u_n</span> directement à partir de <span class="m">n</span>. Dès qu'on connaît le premier terme et la raison, on passe de l'une à l'autre.</p>
+    <ul class="clean">
+      <li><b>Arithmétique</b> — pour aller de <span class="m">u_0</span> à <span class="m">u_n</span>, on ajoute <span class="m">r</span> exactement <span class="m">n</span> fois : <span class="m">u_n = u_0 + n r</span>.</li>
+      <li><b>Géométrique</b> — pour aller de <span class="m">u_0</span> à <span class="m">u_n</span>, on multiplie par <span class="m">q</span> exactement <span class="m">n</span> fois : <span class="m">u_n = u_0 × q^n</span>.</li>
+    </ul>
+    <p>Le <span class="m">n</span> qui apparaît (en facteur ou en exposant) compte le <b>nombre de pas</b>, pas l'indice. Si la suite démarre à <span class="m">u_1</span>, il n'y a que <span class="m">n − 1</span> pas de <span class="m">u_1</span> jusqu'à <span class="m">u_n</span> : d'où les versions générales <span class="m">u_n = u_p + (n − p) r</span> et <span class="m">u_n = u_p × q^{n − p}</span>.</p>
+    <div class="fbox">
+      <div class="cap">Deux exemples, même méthode</div>
+      <div class="note" style="margin-top:0"><b>Arithmétique</b> — <span class="m">u_0 = 5</span> et <span class="m">r = 3</span> : on ajoute 3 à chaque pas, donc <span class="m">u_n = 5 + 3n</span> et <span class="m">u_{20} = 5 + 60 = 65</span>.<br>
+      <b>Géométrique</b> — <span class="m">v_0 = 5</span> et <span class="m">q = 3</span> : on multiplie par 3 à chaque pas, donc <span class="m">v_n = 5 × 3^n</span> et <span class="m">v_{20} = 5 × 3^{20}</span>, un nombre à onze chiffres. Même départ, même « 3 » : tout l'écart vient du <b>×</b> mis à la place du <b>+</b>.</div>
+    </div>
+
+    <h3>Les sommes : une par modèle</h3>
+    <p>Additionner les termes un par un devient impossible dès qu'il y en a cent. Il existe donc <b>une formule de somme pour chaque modèle</b>, et ce ne sont pas les mêmes : c'est la nature de la suite qui décide laquelle employer.</p>
+    <ul class="clean">
+      <li><b>Suite arithmétique → la somme des entiers.</b> Les termes montent d'un pas constant, comme <span class="m">1 + 2 + 3 + ... + n</span>. Astuce de Gauss : on écrit la somme à l'endroit, puis à l'envers en dessous, et on additionne colonne par colonne — chaque colonne vaut <b>premier + dernier</b>. Comme on a ainsi compté la somme deux fois, on divise par 2.</li>
+      <li><b>Suite géométrique → la somme des puissances.</b> Les termes se multiplient, comme <span class="m">1 + q + q² + ... + q^n</span>. Gauss ne marche plus : on multiplie la somme par la raison, puis on soustrait — presque tout se simplifie au milieu et il ne reste que deux termes.</li>
+    </ul>
+    <div class="fgrid">
+      <div class="fbox arith">
+        <div class="cap">Arithmétique · la somme des entiers</div>
+        <span class="m mblk">somme = nombre de termes × @{premier + dernier}{2}</span>
+        <div class="note">Dix termes de raison 1 : <span class="m">1 + 2 + 3 + ... + 10 = 55</span>.</div>
+      </div>
+      <div class="fbox geo">
+        <div class="cap">Géométrique · la somme des puissances</div>
+        <span class="m mblk">somme = premier terme × @{1 − raison^{nb de termes}}{1 − raison}</span>
+        <div class="note">Dix termes de raison 2 : <span class="m">1 + 2 + 4 + ... + 512 = 1023</span>.</div>
+      </div>
+    </div>
+    <p>Mêmes dix termes, même premier terme 1 — et pourtant 55 d'un côté, 1023 de l'autre. Appliquer la formule des entiers à une suite géométrique, ou l'inverse, se voit immédiatement à la copie.</p>
 
     <h3>À manipuler</h3>
     <p>Bougez les curseurs : observez comment <span class="m">r</span> et <span class="m">q</span> changent complètement la nature de la suite.</p>
@@ -514,14 +557,15 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
     </div>
 
     <h3>Les sommes</h3>
+    <p class="ftop">Une somme par modèle : celle des <b>entiers</b> pour les suites arithmétiques, celle des <b>puissances</b> pour les suites géométriques. On choisit la formule d'après la nature de la suite, jamais d'après l'allure de la somme.</p>
     <div class="fgrid">
       <div class="fbox arith">
-        <div class="cap">Somme des entiers</div>
+        <div class="cap">Arithmétique · somme des entiers</div>
         <span class="m mblk">1 + 2 + ... + n = @{n(n+1)}{2}</span>
         <div class="note">Cas général : <b>somme = nombre de termes ×</b> <span class="m">@{premier + dernier}{2}</span></div>
       </div>
       <div class="fbox geo">
-        <div class="cap">Somme des puissances</div>
+        <div class="cap">Géométrique · somme des puissances</div>
         <span class="m mblk">1 + q + q² + ... + q^n = @{1 − q^{n+1}}{1 − q}</span>
         <div class="note">(pour <span class="m">q ≠ 1</span>) Cas général : <b>somme = premier terme ×</b> <span class="m">@{1 − q^{nb de termes}}{1 − q}</span></div>
       </div>
@@ -597,20 +641,48 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
       <li><b>Conclusion</b> — la propriété est vraie au rang de départ et elle se transmet : elle est vraie pour tout <span class="m">n ≥ n_0</span>.</li>
     </ul>
     <p>Le cœur du travail est toujours l'hérédité : on <b>part</b> de l'hypothèse et on la transforme jusqu'à obtenir la propriété au rang suivant.</p>
+
+    <h3>Écrire la cible, puis l'atteindre</h3>
+    <p>Avant de transformer quoi que ce soit, écrivez <b>ce que vous devez obtenir</b>. La cible, c'est <span class="m">P(n+1)</span> : la propriété dans laquelle on a remplacé <span class="m">n</span> par <span class="m">n+1</span> <b>partout</b>.</p>
+    <ul class="clean">
+      <li>Si <span class="m">P(n)</span> est « <span class="m">u_n ≤ 6</span> », alors <span class="m">P(n+1)</span> est « <span class="m">u_{n+1} ≤ 6</span> » — le 6 ne bouge pas.</li>
+      <li>Si <span class="m">P(n)</span> est « <span class="m">2^n ≥ n + 1</span> », alors <span class="m">P(n+1)</span> est « <span class="m">2^{n+1} ≥ (n+1) + 1</span> », c'est-à-dire « <span class="m">2^{n+1} ≥ n + 2</span> » — les <b>deux</b> côtés changent.</li>
+    </ul>
+    <p>En transformant l'hypothèse, on tombe rarement <b>pile</b> sur cette cible : on obtient une inégalité voisine, et il reste un pas. Deux outils suffisent à le franchir.</p>
+    <ul class="clean">
+      <li><b>Enchaîner les inégalités (transitivité).</b> On visait <span class="m">A ≥ C</span> et on a obtenu <span class="m">A ≥ B</span> : il suffit alors de montrer <span class="m">B ≥ C</span>. On écrit <span class="m">A ≥ B ≥ C</span>, donc <span class="m">A ≥ C</span>. Autrement dit : ce qu'on a obtenu est <b>encore meilleur</b> que ce qu'on demandait.</li>
+      <li><b>Comparer deux expressions</b> se fait toujours pareil : on calcule leur <b>différence</b> <span class="m">B − C</span> et on regarde son signe. Si <span class="m">B − C ≥ 0</span>, alors <span class="m">B ≥ C</span>.</li>
+    </ul>
   </div>
 
   <div class="pane" data-tab="Formules">
     <p class="ftop">Ici il n'y a rien à calculer : ce qui est noté, c'est la <b>rédaction</b>. Apprenez le squelette, il est identique dans tous les sujets.</p>
     <div class="fbox key">
-      <div class="cap">Le squelette de rédaction — à recopier tel quel</div>
-      <p style="font-size:14px;line-height:1.85;margin-top:4px">
-      Soit <span class="m">P(n)</span> la propriété : « … ».<br>
-      <b>Initialisation.</b> Pour <span class="m">n = 0</span> : … donc <span class="m">P(0)</span> est vraie.<br>
-      <b>Hérédité.</b> Supposons que pour un certain entier <span class="m">n ≥ 0</span>, <span class="m">P(n)</span> est vraie, c'est-à-dire … <br>Montrons que <span class="m">P(n+1)</span> est vraie, c'est-à-dire … <br>
-      <span style="color:var(--ink3)">[transformations à partir de l'hypothèse]</span><br>
+      <div class="cap">Le squelette — trois blocs, rien d'autre</div>
+      <p style="font-size:14px;line-height:1.9;margin-top:4px">
+      Soit <span class="m">P(n)</span> : « … ».<br>
+      <b>1. Initialisation.</b> … donc <span class="m">P(0)</span> est vraie.<br>
+      <b>2. Hérédité.</b> Supposons <span class="m">P(n)</span> vraie pour un certain <span class="m">n ≥ 0</span>, c'est-à-dire … <br>
+      Montrons <span class="m">P(n+1)</span>, c'est-à-dire … <br>
+      <span style="color:var(--ink3)">[on part de l'hypothèse et on la transforme]</span><br>
       Donc <span class="m">P(n+1)</span> est vraie.<br>
-      <b>Conclusion.</b> <span class="m">P(0)</span> est vraie et <span class="m">P</span> est héréditaire, donc par récurrence <span class="m">P(n)</span> est vraie pour tout <span class="m">n ≥ 0</span>.
+      <b>3. Conclusion.</b> Par récurrence, <span class="m">P(n)</span> est vraie pour tout <span class="m">n ≥ 0</span>.
       </p>
+      <div class="note">Ce n'est pas une formule à comprendre, c'est une <b>mise en page</b> : seuls les « … » changent d'un sujet à l'autre, le reste se recopie mot pour mot.</div>
+    </div>
+    <div class="fbox">
+      <div class="cap">Le même squelette, rempli</div>
+      <div class="note" style="margin-top:0">Avec le fil rouge <span class="m">u_0 = 2</span> et <span class="m">u_{n+1} = 0,5 u_n + 3</span>, montrons que la suite reste positive.</div>
+      <p style="font-size:14px;line-height:1.9;margin-top:10px">
+      Soit <span class="m">P(n)</span> : « <span class="m">u_n ≥ 0</span> ».<br>
+      <b>1. Initialisation.</b> <span class="m">u_0 = 2 ≥ 0</span> donc <span class="m">P(0)</span> est vraie.<br>
+      <b>2. Hérédité.</b> Supposons <span class="m">P(n)</span> vraie pour un certain <span class="m">n ≥ 0</span>, c'est-à-dire <span class="m">u_n ≥ 0</span>.<br>
+      Montrons <span class="m">P(n+1)</span>, c'est-à-dire <span class="m">u_{n+1} ≥ 0</span>.<br>
+      <span style="color:var(--ink3)">De <span class="m">u_n ≥ 0</span> on tire <span class="m">0,5 u_n ≥ 0</span>, puis <span class="m">0,5 u_n + 3 ≥ 3</span>. Or <span class="m">0,5 u_n + 3 = u_{n+1}</span> et <span class="m">3 ≥ 0</span>.</span><br>
+      Donc <span class="m">P(n+1)</span> est vraie.<br>
+      <b>3. Conclusion.</b> Par récurrence, <span class="m">u_n ≥ 0</span> pour tout <span class="m">n ≥ 0</span>.
+      </p>
+      <div class="note">Lisez les deux cadres ligne à ligne : c'est le même texte, avec les « … » remplacés. Seule la ligne grise demande de réfléchir.</div>
     </div>
     <div class="fbox">
       <div class="cap">Les deux formulations à distinguer</div>
@@ -644,12 +716,20 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
         <p>Démontrer que pour tout entier <span class="m">n ≥ 0</span> : <span class="m">2^n ≥ n + 1</span>.</p>
       </div>
       <details class="fix"><summary>Voir le corrigé</summary><div class="corr">
-        <div class="step"><span class="k">1</span><div><b>Initialisation.</b> <span class="m">2^0 = 1</span> et <span class="m">0 + 1 = 1</span>, donc <span class="m">2^0 ≥ 1</span> : vrai au rang 0.</div></div>
-        <div class="step"><span class="k">2</span><div><b>Hérédité.</b> Supposons <span class="m">2^n ≥ n + 1</span> pour un certain <span class="m">n ≥ 0</span>.</div></div>
-        <div class="step"><span class="k">3</span><div>On fait apparaître <span class="m">2^{n+1}</span> en multipliant l'hypothèse par 2 :<br>
-        <span class="m mblk">2^{n+1} = 2 × 2^n ≥ 2(n + 1) = 2n + 2</span></div></div>
-        <div class="step"><span class="k">4</span><div>Reste à comparer à la cible <span class="m">n + 2</span> : <span class="m">2n + 2 − (n + 2) = n ≥ 0</span>, donc <span class="m">2n + 2 ≥ n + 2</span>.</div></div>
-        <div class="step"><span class="k">5</span><div>Par transitivité : <span class="m">2^{n+1} ≥ n + 2</span>, soit <span class="m">P(n+1)</span>.</div></div>
+        <div class="step"><span class="k">1</span><div>Propriété <span class="m">P(n)</span> : « <span class="m">2^n ≥ n + 1</span> ».</div></div>
+        <div class="step"><span class="k">2</span><div><b>Initialisation.</b> <span class="m">2^0 = 1</span> et <span class="m">0 + 1 = 1</span>, donc <span class="m">2^0 ≥ 1</span> : vrai au rang 0.</div></div>
+        <div class="step"><span class="k">3</span><div><b>Hérédité.</b> Supposons <span class="m">2^n ≥ n + 1</span> pour un certain <span class="m">n ≥ 0</span>.<br>
+        <b>On écrit la cible</b> : dans <span class="m">P(n)</span> on remplace <span class="m">n</span> par <span class="m">n+1</span> partout, ce qui donne <span class="m">2^{n+1} ≥ (n+1) + 1</span>, autrement dit
+        <span class="m mblk">objectif : 2^{n+1} ≥ n + 2</span></div></div>
+        <div class="step"><span class="k">4</span><div>On fait apparaître <span class="m">2^{n+1}</span> en multipliant l'hypothèse par 2 :<br>
+        <span class="m mblk">2^{n+1} = 2 × 2^n ≥ 2(n + 1) = 2n + 2</span>
+        On est arrivé à <span class="m">2^{n+1} ≥ 2n + 2</span>. Ce n'est <b>pas encore</b> la cible, qui demandait <span class="m">n + 2</span> et non <span class="m">2n + 2</span> : il reste un pas.</div></div>
+        <div class="step"><span class="k">5</span><div>On compare donc les deux minorants, par la différence :<br>
+        <span class="m mblk">(2n + 2) − (n + 2) = n ≥ 0 &nbsp;&nbsp;donc&nbsp;&nbsp; 2n + 2 ≥ n + 2</span>
+        Ce qu'on a obtenu est <b>plus grand</b> que ce qu'on visait : c'est ce qu'il fallait.</div></div>
+        <div class="step"><span class="k">6</span><div>On enchaîne les deux inégalités (transitivité) :<br>
+        <span class="m mblk">2^{n+1} ≥ 2n + 2 ≥ n + 2</span>
+        donc <span class="m">2^{n+1} ≥ n + 2</span> : <span class="m">P(n+1)</span> est vraie.</div></div>
         <div class="res"><b>Conclusion.</b> Pour tout <span class="m">n ≥ 0</span>, <span class="m">2^n ≥ n + 1</span>. Ce résultat sert à prouver que <span class="m">2^n → +∞</span> par comparaison (partie 05).</div>
       </div></details>
     </div>
@@ -693,7 +773,22 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
       <li>On combine avec les règles d'opérations.</li>
       <li>Si on tombe sur une des <b>4 formes indéterminées</b>, le calcul direct est interdit : il faut transformer l'écriture avant de conclure.</li>
     </ul>
-    <p>La technique n°1 : <b>factoriser par le terme dominant</b> (celui de plus haut degré), au numérateur comme au dénominateur, puis simplifier.</p>
+    <h3>Les deux techniques pour lever une forme indéterminée</h3>
+    <ul class="clean">
+      <li><b>Technique 1 — factoriser par le terme dominant.</b> On met en facteur le terme de plus haut degré, au numérateur <b>comme</b> au dénominateur, puis on simplifie. Il ne reste que des <span class="m">@{1}{n^k}</span>, qui tendent tous vers 0.
+      <span class="m mblk">@{3n² − n}{n² + 5} = @{n²(3 − @{1}{n})}{n²(1 + @{5}{n²})} = @{3 − @{1}{n}}{1 + @{5}{n²}} → 3</span></li>
+      <li><b>Technique 2 — multiplier par la quantité conjuguée.</b> Le conjugué de <span class="m">√a − √b</span> est <span class="m">√a + √b</span> : on change le signe du milieu. On multiplie <b>et</b> on divise par lui, et l'identité <span class="m">(√a − √b)(√a + √b) = a − b</span> fait disparaître les racines du numérateur.
+      <span class="m mblk">√(n+1) − √n = @{(n+1) − n}{√(n+1) + √n} = @{1}{√(n+1) + √n} → 0</span></li>
+    </ul>
+
+    <h3>Laquelle choisir&nbsp;?</h3>
+    <p>Dans l'ordre, sans jamais sauter la première question :</p>
+    <ul class="clean">
+      <li><b>1. Le calcul direct suffit-il ?</b> On applique les limites usuelles et les règles d'opérations. Si aucune forme indéterminée n'apparaît, c'est fini : on ne transforme jamais une expression « au cas où ».</li>
+      <li><b>2. Forme indéterminée, et une racine dans une différence</b> (<span class="m">√... − √...</span> ou <span class="m">√... − n</span>) → <b>technique 2</b>, la quantité conjuguée. C'est le seul cas où on l'emploie.</li>
+      <li><b>3. Forme indéterminée sans racine</b>, entre polynômes en <span class="m">n</span> — un quotient <span class="m">@{∞}{∞}</span> ou une différence <span class="m">∞ − ∞</span> → <b>technique 1</b>, le terme dominant.</li>
+    </ul>
+    <p>Les deux s'enchaînent souvent : une fois la quantité conjuguée passée, on retombe sur une expression ordinaire qu'on termine au calcul direct ou au terme dominant.</p>
   </div>
 
   <div class="pane" data-tab="Formules">
@@ -800,7 +895,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--ink3);font
 
   <div class="pane" data-tab="Cours">
     <h3>Quand les utiliser</h3>
-    <p>Dès qu'apparaît un morceau <b>impossible à calculer directement</b> : <span class="m">(−1)^n</span>, <span class="m">sin(n)</span>, <span class="m">cos(n)</span>, ou une expression qu'on ne sait pas simplifier. L'idée : on ne calcule pas la suite, on la <b>coince</b> entre des suites qu'on connaît.</p>
+    <p>Dès qu'apparaît un morceau <b>impossible à calculer directement</b> : <span class="m">(−1)^n</span>, <span class="m">sin(n)</span>, <span class="m">cos(n)</span>, ou une expression qu'aucune règle de calcul ne réduit (par exemple une somme dont le nombre de termes dépend de <span class="m">n</span>, comme <span class="m">@{1}{n+1} + @{1}{n+2} + ... + @{1}{2n}</span>). L'idée : on ne calcule pas la suite, on la <b>coince</b> entre des suites qu'on connaît.</p>
 
     <h3>Théorèmes de comparaison — pour l'infini</h3>
     <ul class="clean">
